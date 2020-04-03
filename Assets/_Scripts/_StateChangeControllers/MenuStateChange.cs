@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuStateAction : StateChangeBase
+public class MenuStateChange : StateChangeBase
 {
     public override void StateChangeActionOff()
     {

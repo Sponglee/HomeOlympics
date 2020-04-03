@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxingStateAction : StateChangeActivity, IInteractable
+public class BoxingStateAction : ActivityStateChange, IInteractable
 {
     public void Deselect()
     {
@@ -11,14 +11,14 @@ public class BoxingStateAction : StateChangeActivity, IInteractable
 
     public void Interact()
     {
-        if(StateController.Instance.GameState == GameStates.Activity)
+        if(GameManager.Instance.GameState == GameStates.Activity)
         {
-            StateController.Instance.GameState = GameStates.Walking;
+            GameManager.Instance.GameState = GameStates.Walking;
             Select();
         }
         else
         {
-            StateController.Instance.GameState = GameStates.Activity;
+            GameManager.Instance.GameState = GameStates.Activity;
             Deselect();
         }
     }

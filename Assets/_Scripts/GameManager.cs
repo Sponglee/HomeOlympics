@@ -9,11 +9,12 @@ public enum GameStates
     Paused
 }
 
-public class StateController : Singleton<StateController>
+public class GameManager : Singleton<GameManager>
 {
-    public class UpdateStateEvent : UnityEvent<GameStates> { }
+    public class UpdateStateEvent : UnityEvent<GameStates,Transform> { }
     public static UpdateStateEvent UpdateState = new UpdateStateEvent();
 
+    public Transform targetedActivity = null;
 
     public GameStates GameState
     {
@@ -29,16 +30,15 @@ public class StateController : Singleton<StateController>
                 lastState = gameState;
             }
             gameState = value;
-            UpdateState.Invoke(value);
+            UpdateState.Invoke(value, targetedActivity);
         }
     }
 
 
-    [Header("")]
+    //[Header("")]
+    public GameStates lastState;
     [SerializeField] private GameStates gameState;
-    [SerializeField] private int score = 0;
-    private GameStates lastState;
-
+    
 
 
    

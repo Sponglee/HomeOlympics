@@ -21,13 +21,18 @@ public class FunctionHandler : Singleton<FunctionHandler>
     {
         if (menuCam.gameObject.activeSelf)
         {
-
-            StateController.Instance.GameState = GameStates.Walking;
+            //Check if there was a previous state to get back to it (GameStart)?
+            if(GameManager.Instance.lastState != GameManager.Instance.GameState)
+            {
+                GameManager.Instance.GameState = GameManager.Instance.lastState;
+            }
+            else
+                GameManager.Instance.GameState = GameStates.Walking;
         }
         else
         {
 
-            StateController.Instance.GameState = GameStates.Paused;
+            GameManager.Instance.GameState = GameStates.Paused;
         }
     }
 

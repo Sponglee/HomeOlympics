@@ -12,13 +12,18 @@ public abstract class StateChangeBase : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        StateController.UpdateState.AddListener(ChangeState);
+        GameManager.UpdateState.AddListener(ChangeState);
     }
     
-    private void ChangeState(GameStates targetState)
+    private void ChangeState(GameStates targetState, Transform target = null)
     {
         if (targetState == stateName)
         {
+            //Prevent selecting multiple activities through interact
+            if (GameManager.Instance.GameState == GameStates.Activity && target != null && target != transform)
+                return;
+
+            Debug.Log("STATECHANGED");
             CameraManager.Instance.SetLive(stateCam);
             StateChangeActionOn();
         }

@@ -6,7 +6,7 @@ public class InteractionDetector : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<IInteractable>() != null)
+        if(GameManager.Instance.GameState != GameStates.Activity && other.GetComponent<IInteractable>() != null)
         {
             other.GetComponent<IInteractable>().Select();
         }
@@ -15,7 +15,7 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<IInteractable>() != null)
+        if (GameManager.Instance.GameState != GameStates.Activity && other.GetComponent<IInteractable>() != null)
         {
             other.GetComponent<IInteractable>().Deselect();
         }
@@ -25,6 +25,7 @@ public class InteractionDetector : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log(">>" + other.gameObject.name);
             if (other.GetComponent<IInteractable>() != null)
             {
                 other.GetComponent<IInteractable>().Interact();
