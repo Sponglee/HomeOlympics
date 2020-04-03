@@ -49,6 +49,8 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+
 #if UNITY_EDITOR
     using UnityEditor;
 #endif
@@ -74,6 +76,7 @@ public class FirstPersonAIO : MonoBehaviour {
     public  float   fOVToMouseSensitivity = 1;
     public float cameraSmoothing = 5f;
     public bool lockAndHideCursor = false;
+    public CinemachineVirtualCamera vcam;
     public Camera playerCamera;
     public bool enableCameraShake=false;
     internal Vector3 cameraStartingPosition;
@@ -271,6 +274,16 @@ public class BETA_SETTINGS{
 
     }
 
+    private void OnEnable()
+    {
+        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
+    }
+
+    private void OnDisable()
+    {
+        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
+    }
+
     private void Start()
     {
         #region Look Settings - Start
@@ -280,7 +293,7 @@ public class BETA_SETTINGS{
             canvas.gameObject.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvas.pixelPerfect = true;
-            canvas.transform.SetParent(playerCamera.transform);
+            canvas.transform.SetParent(vcam.transform);
             canvas.transform.position = Vector3.zero;
 
             if(autoCrosshair){
@@ -307,9 +320,10 @@ public class BETA_SETTINGS{
             }
         }
         mouseSensitivityInternal = mouseSensitivity;
-        cameraStartingPosition = playerCamera.transform.localPosition;
-        if(lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
-        baseCamFOV = playerCamera.fieldOfView;
+        cameraStartingPosition = vcam.transform.localPosition;
+
+        
+        baseCamFOV = vcam.m_Lens.FieldOfView;
         #endregion
 
         #region Movement Settings - Start  
@@ -336,7 +350,7 @@ public class BETA_SETTINGS{
         #endregion
 
         #region BETA_SETTINGS - Start
-        fOVKick.fovStart = playerCamera.fieldOfView;
+        fOVKick.fovStart = vcam.m_Lens.FieldOfView;
         #endregion
     }
 
@@ -347,7 +361,7 @@ public class BETA_SETTINGS{
             if(enableCameraMovement){
             float mouseYInput;
             float mouseXInput;
-            float camFOV = playerCamera.fieldOfView;
+            float camFOV = vcam.m_Lens.FieldOfView;
             mouseYInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.X ? Input.GetAxis("Mouse Y") : -Input.GetAxis("Mouse Y");
             mouseXInput = mouseInputInversion == InvertMouseInput.None || mouseInputInversion == InvertMouseInput.Y ? Input.GetAxis("Mouse X") : -Input.GetAxis("Mouse X");
             if(targetAngles.y > 180) { targetAngles.y -= 360; followAngles.y -= 360; } else if(targetAngles.y < -180) { targetAngles.y += 360; followAngles.y += 360; }
@@ -357,7 +371,7 @@ public class BETA_SETTINGS{
             targetAngles.y = Mathf.Clamp(targetAngles.y, -0.5f * Mathf.Infinity, 0.5f * Mathf.Infinity);
             targetAngles.x = Mathf.Clamp(targetAngles.x, -0.5f * verticalRotationRange, 0.5f * verticalRotationRange);
             followAngles = Vector3.SmoothDamp(followAngles, targetAngles, ref followVelocity, (cameraSmoothing)/100);
-            playerCamera.transform.localRotation = Quaternion.Euler(-followAngles.x + originalRotation.x,0,0);
+            vcam.transform.localRotation = Quaternion.Euler(-followAngles.x + originalRotation.x,0,0);
             transform.localRotation =  Quaternion.Euler(0, followAngles.y+originalRotation.y, 0);
         }
     
@@ -683,12 +697,12 @@ public class BETA_SETTINGS{
     public IEnumerator CameraShake(float Duration, float Magnitude){
         float elapsed =0;
         while(elapsed<Duration && enableCameraShake){
-            playerCamera.transform.localPosition =Vector3.MoveTowards(playerCamera.transform.localPosition, new Vector3(cameraStartingPosition.x+ Random.Range(-1,1)*Magnitude,cameraStartingPosition.y+Random.Range(-1,1)*Magnitude,cameraStartingPosition.z), Magnitude*2);
+            vcam.transform.localPosition =Vector3.MoveTowards(vcam.transform.localPosition, new Vector3(cameraStartingPosition.x+ Random.Range(-1,1)*Magnitude,cameraStartingPosition.y+Random.Range(-1,1)*Magnitude,cameraStartingPosition.z), Magnitude*2);
             yield return new WaitForSecondsRealtime(0.001f);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        playerCamera.transform.localPosition = cameraStartingPosition;
+        vcam.transform.localPosition = cameraStartingPosition;
     }
 
     float SlopeCheck(){
@@ -817,6 +831,7 @@ public class BETA_SETTINGS{
             //t.mouseSensitivity = EditorGUILayout.Slider(new GUIContent("Mouse Sensitivity","Determines how sensitive the mouse is."),t.mouseSensitivity, 1,15);
             t.fOVToMouseSensitivity = EditorGUILayout.Slider(new GUIContent("FOV to Mouse Sensitivity","Determines how much the camera's Field Of View will effect the mouse sensitivity. \n\n0 = no effect, 1 = full effect on sensitivity."),t.fOVToMouseSensitivity,0,1);
             t.cameraSmoothing = EditorGUILayout.Slider(new GUIContent("Camera Smoothing","Determines how smooth the camera movement is."),t.cameraSmoothing,1,25);
+            t.vcam = (CinemachineVirtualCamera)EditorGUILayout.ObjectField(new GUIContent("Cinemachine vCamera", "Cinemachine attached to this controller"), t.vcam, typeof(CinemachineVirtualCamera), true);
             t.playerCamera = (Camera)EditorGUILayout.ObjectField(new GUIContent("Player Camera", "Camera attached to this controller"),t.playerCamera,typeof(Camera),true);
             if(!t.playerCamera){EditorGUILayout.HelpBox("A Camera is required for operation.",MessageType.Error);}
             t.enableCameraShake = EditorGUILayout.ToggleLeft(new GUIContent("Enable Camera Shake?", "Call this Coroutine externally with duration ranging from 0.01 to 1, and a magnitude of 0.01 to 0.5."), t.enableCameraShake);
