@@ -5,15 +5,16 @@ using UnityEngine;
 public class ActivityStateChange : StateChangeBase, IInteractable
 {
     public Canvas activityCanvas;
+    public ActivityControllerBase activity;
 
     public override void StateChangeActionOff()
     {
-        FunctionHandler.Instance.uiCanvas.gameObject.SetActive(false);
+        activity.DeactivateActivity();
     }
 
     public override void StateChangeActionOn()
     {
-        FunctionHandler.Instance.uiCanvas.gameObject.SetActive(true);
+        activity.InitializeActivity();
     }
 
     public void Interact()
@@ -41,7 +42,7 @@ public class ActivityStateChange : StateChangeBase, IInteractable
 
     public void Deselect()
     {
-        Debug.Log(">D : " + gameObject.name);
+        //Debug.Log(">D : " + gameObject.name);
         activityCanvas.gameObject.SetActive(false);
         GameManager.Instance.targetedActivity = null;
     }

@@ -88,6 +88,8 @@ public class FirstPersonAIO : MonoBehaviour {
     float smoothRef;
     Image StaminaMeter;
     Image StaminaMeterBG;
+
+    [SerializeField] private Image crossHair;
     public Sprite Crosshair;
     public Vector3 targetAngles;
     private Vector3 followAngles;
@@ -276,12 +278,12 @@ public class BETA_SETTINGS{
 
     private void OnEnable()
     {
-        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; }
+        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; if(crossHair!=null) crossHair.enabled = true; }
     }
 
     private void OnDisable()
     {
-        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
+        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; crossHair.enabled = false; }
     }
 
     private void Start()
@@ -297,7 +299,7 @@ public class BETA_SETTINGS{
             canvas.transform.position = Vector3.zero;
 
             if(autoCrosshair){
-                Image crossHair = new GameObject("Crosshair").AddComponent<Image>();
+                crossHair = new GameObject("Crosshair").AddComponent<Image>();
                 crossHair.sprite = Crosshair;
                 crossHair.rectTransform.sizeDelta = new Vector2(25,25);
                 crossHair.transform.SetParent(canvas.transform);

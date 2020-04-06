@@ -23,13 +23,14 @@ public abstract class StateChangeBase : MonoBehaviour
             if (GameManager.Instance.GameState == GameStates.Activity && target != null && target != transform)
                 return;
 
-            Debug.Log("STATECHANGED");
+            //Debug.Log("STATECHANGED");
             CameraManager.Instance.SetLive(stateCam);
             StateChangeActionOn();
         }
         else
         {
-            StateChangeActionOff();
+            if(GameManager.Instance.lastState == stateName)
+                StateChangeActionOff();
         }
     }
 

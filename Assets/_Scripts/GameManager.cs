@@ -24,13 +24,13 @@ public class GameManager : Singleton<GameManager>
         }
         set
         {
-            Debug.Log(value);
             if (value != gameState)
             {
                 lastState = gameState;
             }
-            gameState = value;
-            UpdateState.Invoke(value, targetedActivity);
+                gameState = value;
+                UpdateState.Invoke(value, targetedActivity);
+                Debug.Log(value);
         }
     }
 

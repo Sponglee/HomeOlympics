@@ -61,7 +61,7 @@ public class CameraManager : Singleton<CameraManager>
     {
         GameObject[] tmpObjects = GameObject.FindGameObjectsWithTag(tag);
 
-        Debug.Log(tmpObjects.Length);
+        //Debug.Log(tmpObjects.Length);
 
         return tmpObjects;
     }

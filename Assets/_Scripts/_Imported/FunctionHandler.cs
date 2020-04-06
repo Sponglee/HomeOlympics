@@ -36,6 +36,14 @@ public class FunctionHandler : Singleton<FunctionHandler>
         }
     }
 
+    public void ToggleUI(string activityName)
+    {
+        uiCanvas.gameObject.SetActive(!uiCanvas.gameObject.activeSelf);
+    }
+
+    /// <summary>
+    /// ///////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
 
     public void Restart()
     {
