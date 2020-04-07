@@ -5,9 +5,9 @@ using Cinemachine;
 
 public abstract class StateChangeBase : MonoBehaviour
 {
-
-   public GameStates stateName;
-   public CinemachineVirtualCamera stateCam;
+  
+    public GameStates stateName;
+    public CinemachineVirtualCamera stateCam;
 
     // Start is called before the first frame update
     void Awake()

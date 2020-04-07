@@ -14,8 +14,14 @@ public class GameManager : Singleton<GameManager>
     public class UpdateStateEvent : UnityEvent<GameStates,Transform> { }
     public static UpdateStateEvent UpdateState = new UpdateStateEvent();
 
-    public Transform targetedActivity = null;
+    [SerializeField] private Transform targetedActivity = null;
+    [SerializeField] private GameStates gameState;
+    [SerializeField] private Canvas activityCanvas;
 
+
+
+
+    public GameStates lastState;
     public GameStates GameState
     {
         get
@@ -28,16 +34,12 @@ public class GameManager : Singleton<GameManager>
             {
                 lastState = gameState;
             }
-                gameState = value;
-                UpdateState.Invoke(value, targetedActivity);
-                Debug.Log(value);
+            gameState = value;
+            UpdateState.Invoke(value, targetedActivity);
+            Debug.Log(value);
         }
     }
-
-
     //[Header("")]
-    public GameStates lastState;
-    [SerializeField] private GameStates gameState;
     
 
 
@@ -67,4 +69,19 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+
+
+    public void SelectActivity(Transform target, string name)
+    {
+        targetedActivity.position = transform.position;
+        Debug.Log(name);
+        activityCanvas.gameObject.SetActive(true);
+        activityCanvas.transform.position = target.position;
+        
+    }
+
+    public void DeselectActivity()
+    {
+        activityCanvas.gameObject.SetActive(false);
+    }
 }
