@@ -6,15 +6,16 @@ public class ActivityStateChange : StateChangeBase, IInteractable
 {
     public string activityName;
     public ActivityControllerBase activity;
-
+   
     public override void StateChangeActionOff()
     {
-        activity.DeactivateActivity();
+        if(GameManager.Instance.targetedActivity == this.transform)
+            activity.DeactivateActivity();
     }
 
     public override void StateChangeActionOn()
     {
-        activity.InitializeActivity();
+        activity.ActivateActivity();
     }
 
     public void Interact()

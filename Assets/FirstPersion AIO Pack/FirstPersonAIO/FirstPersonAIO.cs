@@ -278,12 +278,25 @@ public class BETA_SETTINGS{
 
     private void OnEnable()
     {
-        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false; if(crossHair!=null) crossHair.enabled = true; }
+        if (lockAndHideCursor)
+        {
+            Debug.Log("LOCK");
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            if (crossHair!=null)
+                crossHair.enabled = true;
+        }
     }
 
     private void OnDisable()
     {
-        if (lockAndHideCursor) { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; crossHair.enabled = false; }
+        if (lockAndHideCursor)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            if(crossHair != null)
+                crossHair.enabled = false;
+        }
     }
 
     private void Start()

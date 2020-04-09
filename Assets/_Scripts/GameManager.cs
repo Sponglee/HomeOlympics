@@ -14,14 +14,13 @@ public class GameManager : Singleton<GameManager>
     public class UpdateStateEvent : UnityEvent<GameStates,Transform> { }
     public static UpdateStateEvent UpdateState = new UpdateStateEvent();
 
-    [SerializeField] private Transform targetedActivity = null;
-    [SerializeField] private GameStates gameState;
-    [SerializeField] private Canvas activityCanvas;
-
-
-
-
+    public Transform targetedActivity = null;
     public GameStates lastState;
+
+    
+    [SerializeField] private GameStates gameState;
+    [SerializeField] private Transform selectionCanvas;
+
     public GameStates GameState
     {
         get
@@ -39,11 +38,7 @@ public class GameManager : Singleton<GameManager>
             Debug.Log(value);
         }
     }
-    //[Header("")]
-    
 
-
-   
 
     //public class UpdateScoreEvent : UnityEvent<int> { }
     //public static UpdateScoreEvent UpdateScore = new UpdateScoreEvent();
@@ -73,15 +68,15 @@ public class GameManager : Singleton<GameManager>
 
     public void SelectActivity(Transform target, string name)
     {
-        targetedActivity.position = transform.position;
+        targetedActivity = target;
         Debug.Log(name);
-        activityCanvas.gameObject.SetActive(true);
-        activityCanvas.transform.position = target.position;
+        selectionCanvas.gameObject.SetActive(true);
+        selectionCanvas.position = target.position;
         
     }
 
     public void DeselectActivity()
     {
-        activityCanvas.gameObject.SetActive(false);
+        selectionCanvas.gameObject.SetActive(false);
     }
 }
