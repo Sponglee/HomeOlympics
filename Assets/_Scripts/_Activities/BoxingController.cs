@@ -5,14 +5,17 @@ using UnityEngine.Events;
 
 public class BoxingController : ActivityControllerBase
 {
-    public class BoxingTargetDestroyedEvent : UnityEvent<GameObject> { }
-    public static BoxingTargetDestroyedEvent TargetDestroyed = new BoxingTargetDestroyedEvent();
+    //public class BoxingTargetDestroyedEvent : UnityEvent<GameObject> { }
+    //public static BoxingTargetDestroyedEvent TargetDestroyed = new BoxingTargetDestroyedEvent();
 
     public class BoxingScoreUpdateEvent : UnityEvent<string> { }
     public static BoxingScoreUpdateEvent OnBoxingScoreChanged = new BoxingScoreUpdateEvent();
 
     public class BoxingTimerUpdateEvent : UnityEvent<int> { }
     public static BoxingTimerUpdateEvent OnBoxingTimerChanged = new BoxingTimerUpdateEvent();
+
+    public AudioSource boxingAudio;
+
 
     [SerializeField] private GameObject boxingTargetPref;
     [SerializeField] private Transform boxingTargetLocations;
@@ -23,6 +26,7 @@ public class BoxingController : ActivityControllerBase
     [SerializeField] private HookController hookController;
 
     //GamePlay
+    [SerializeField] private GameObject countDownGraphic;
     [SerializeField] private int roundDuration = 60;
     [SerializeField] private int gameTimer;
     [SerializeField] private int boxingScores = 0;
@@ -50,27 +54,32 @@ public class BoxingController : ActivityControllerBase
         set
         {
             gameTimer = value;
-            OnBoxingTimerChanged.Invoke(value);
+            if (value >= 0)
+            {
+                OnBoxingTimerChanged.Invoke(value);
+            }
+            else
+            {
+                hookController.CanHook = false;
+            }
         }
     }
 
-    private void Start()
-    {
-        TargetDestroyed.AddListener(TargetDestroyedHandler);    
-    }
 
 
     public override void InitializeActivity()
     {
         Debug.Log(">"+gameObject.name);
         ToggleSystems();
-        SpawnTargets();
+        InitializeGamePlay();
+        
     }
 
     public override void DeInitializeActivity()
     {
         Debug.Log("<"+gameObject.name);
         ToggleSystems();
+        KillGamePlay();
     }
 
 
@@ -78,9 +87,51 @@ public class BoxingController : ActivityControllerBase
     {
         boxingTargetsCanvas.gameObject.SetActive(!boxingTargetsCanvas.gameObject.activeSelf);
         boxingHands.SetActive(!boxingHands.activeSelf);
-       
+    }
+
+    public void InitializeGamePlay()
+    {
+        Debug.Log(">>><<<><>><><");
         //Gamestuff here
         ResetGamePlay();
+
+       
+        StartCoroutine(StartBoxingGame());
+    }
+
+    public void KillGamePlay()
+    {
+        StopAllCoroutines();
+        //StopCoroutine(StartBoxingGame());
+    }
+
+    private IEnumerator StartBoxingGame()
+    {
+        countDownGraphic.SetActive(true);
+        yield return new WaitForSecondsRealtime(3f);
+        countDownGraphic.SetActive(false);
+        AudioManager.Instance.PlaySound("boxing_ding");
+        hookController.CanHook = true;
+
+        SpawnTargets();
+
+
+        while (hookController.CanHook)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            BoxingTimeCountdown();
+
+        }
+
+        //Game Stopped   
+   
+        AudioManager.Instance.PlaySound("boxing_finish");
+    }
+
+
+    private void BoxingTimeCountdown()
+    {
+        GameTimer--;
     }
 
     public void ResetGamePlay()
@@ -95,30 +146,61 @@ public class BoxingController : ActivityControllerBase
         }
         boxingTargets.Clear();
 
+        hookController.RetractAll();
+
     }
 
     public void SpawnTargets()
     {
-        
+
+        List<int> spawnIndexes = new List<int>();
+
         for (int i = 0; i < 3; i++)
         {
+            int index;
+
+            do
+            {
+                index = Random.Range(0, boxingTargetLocations.childCount);
+
+            }
+            while (spawnIndexes.Contains(index));
+
+            spawnIndexes.Add(index);
+
+            Vector3 targetPosition = boxingTargetLocations.GetChild(index).position;
             GameObject tmpTarget = Instantiate(boxingTargetPref
-                                                , boxingTargetLocations.GetChild(Random.Range(0,boxingTargetLocations.childCount)).position
-                                                , Quaternion.LookRotation(Camera.main.transform.position - transform.position,Vector3.up)
+                                                , targetPosition
+                                                , Quaternion.LookRotation(Camera.main.transform.position - transform.position, Vector3.up)
                                                 , boxingTargetsHolder);
             boxingTargets.Add(tmpTarget);
+
+        }
+
+        spawnIndexes.Clear();
+
+            
+        
+    }
+
+
+    public void TargetDestroyedHandler(GameObject target)
+    {
+       
+        boxingTargets.Remove(target);
+        Destroy(target);
+        BoxingScores++;
+        AudioManager.Instance.PlaySound("boxing_hit");
+        if (boxingTargets.Count<=0)
+        {
+            Invoke(nameof(SpawnTargets),0.2f);
         }
     }
 
 
-    private void TargetDestroyedHandler(GameObject target)
+    public void MissedHitHandler(Transform hook)
     {
-        boxingTargets.Remove(target);
-        Destroy(target);
-        BoxingScores++;
-        if(boxingTargets.Count<=0)
-        {
-            Invoke(nameof(SpawnTargets),0.2f);
-        }
+        AudioManager.Instance.PlaySound("boxing_miss");
+
     }
 }

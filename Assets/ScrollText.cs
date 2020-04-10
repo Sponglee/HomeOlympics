@@ -19,7 +19,7 @@ public class ScrollText : MonoBehaviour
     {
         transform.Translate(Vector3.left * Time.fixedDeltaTime * speed);
       
-            Debug.Log(Mathf.Abs(scrollTextRect.position.x) + ";" +  resetCoord);
+            //Debug.Log(Mathf.Abs(scrollTextRect.position.x) + ";" +  resetCoord);
         if (Mathf.Abs(scrollTextRect.position.x) >= resetCoord)
         {
             scrollTextRect.localPosition = Vector3.zero;

@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 2405361712409000285}
   - component: {fileID: 2405361712409000286}
   - component: {fileID: 2405361712409000284}
-  - component: {fileID: 3628417533101866608}
   - component: {fileID: 8685225775086358659}
   m_Layer: 8
   m_Name: BoxingTarget
-  m_TagString: Untagged
+  m_TagString: BoxingTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a1bc5d866d4c7544282bcda1fdee2c81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f4c4f082c86586c4781e1025da1a5803, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,18 +88,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 100
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3628417533101866608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405361712409000280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afacc739b2a53594082631c4784d2bc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8685225775086358659
 MonoBehaviour:
   m_ObjectHideFlags: 0
