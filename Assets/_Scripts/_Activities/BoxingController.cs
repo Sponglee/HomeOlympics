@@ -126,6 +126,10 @@ public class BoxingController : ActivityControllerBase
         //Game Stopped   
    
         AudioManager.Instance.PlaySound("boxing_finish");
+        
+
+        //Results here
+        //ToggleResultsWindow();
     }
 
 

@@ -19,8 +19,11 @@ public class ActivityControllerBase : MonoBehaviour
         DeInitializeActivity();
 
         FunctionHandler.Instance.ToggleUI("0");
+
         if (activityUI != null)
+        {
             activityUI.SetActive(!activityUI.activeSelf);
+        }
     }
 
     public virtual void DeInitializeActivity() { }
