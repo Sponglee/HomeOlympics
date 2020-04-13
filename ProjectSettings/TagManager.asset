@@ -8,6 +8,8 @@ TagManager:
   - VCam
   - Hook
   - BoxingTarget
+  - CurlingBroom
+  - CurlingCart
   layers:
   - Default
   - TransparentFX

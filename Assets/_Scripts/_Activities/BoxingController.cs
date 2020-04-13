@@ -70,7 +70,8 @@ public class BoxingController : ActivityControllerBase
     public override void InitializeActivity()
     {
         Debug.Log(">"+gameObject.name);
-        ToggleSystems();
+        boxingTargetsCanvas.gameObject.SetActive(true);
+        boxingHands.SetActive(true);
         InitializeGamePlay();
         
     }
@@ -78,16 +79,13 @@ public class BoxingController : ActivityControllerBase
     public override void DeInitializeActivity()
     {
         Debug.Log("<"+gameObject.name);
-        ToggleSystems();
+        boxingTargetsCanvas.gameObject.SetActive(false);
+        boxingHands.SetActive(false);
         KillGamePlay();
     }
 
 
-    public void ToggleSystems()
-    {
-        boxingTargetsCanvas.gameObject.SetActive(!boxingTargetsCanvas.gameObject.activeSelf);
-        boxingHands.SetActive(!boxingHands.activeSelf);
-    }
+ 
 
     public void InitializeGamePlay()
     {

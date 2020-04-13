@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : Singleton<InputManager>
+public class InputManager : MonoBehaviour
 {
 
 
@@ -10,7 +10,15 @@ public class InputManager : Singleton<InputManager>
 
     public Vector2 input;
 
+    private void OnEnable()
+    {
+        joystick.gameObject.SetActive(true);
+    }
 
+    private void OnDisable()
+    {
+        joystick.gameObject.SetActive(false);
+    }
 
     void Update()
     {

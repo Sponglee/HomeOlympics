@@ -12,7 +12,7 @@ public class SwingController : MonoBehaviour
 
     private void Start()
     {
-        inputManager = InputManager.Instance;
+        //inputManager = InputManager.Instance;
     }
     private void Update()
     {

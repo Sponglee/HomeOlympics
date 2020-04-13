@@ -14,7 +14,7 @@ public class ActivityControllerBase : MonoBehaviour
         if (activityUI != null)
             activityUI.SetActive(!activityUI.activeSelf);
     }
-    public virtual void DeactivateActivity()
+    public void DeactivateActivity()
     {
         DeInitializeActivity();
 

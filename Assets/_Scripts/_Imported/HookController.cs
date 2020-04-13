@@ -17,15 +17,7 @@ public class HookController : MonoBehaviour
     public float retractDuration = 0.5f;
     public bool HasCollided = false;
 
-    //[SerializeField] private PlayerController playerController;
-    [SerializeField] private InputManager inputManager;
-
-   
-    void Start()
-    {
-        inputManager = InputManager.Instance;
-    }
-
+  
    
     public void SwapHands()
     {
