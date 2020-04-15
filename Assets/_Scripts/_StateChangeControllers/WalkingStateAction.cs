@@ -10,13 +10,15 @@ public class WalkingStateAction : StateChangeBase
     {
         Debug.Log("off");
         fpsController.enabled = false;
-        fpsController.gameObject.SetActive(false);
+        fpsController.GetComponent<Rigidbody>().isKinematic = true;
+        fpsController.GetComponent<CapsuleCollider>().isTrigger = true;
     }
 
     public override void StateChangeActionOn()
     {
         Debug.Log("on");
         fpsController.enabled = true;
-        fpsController.gameObject.SetActive(true);
+        fpsController.GetComponent<Rigidbody>().isKinematic = false;
+        fpsController.GetComponent<CapsuleCollider>().isTrigger = false;
     }
 }

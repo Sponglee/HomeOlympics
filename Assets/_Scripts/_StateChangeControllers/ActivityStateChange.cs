@@ -20,7 +20,7 @@ public class ActivityStateChange : StateChangeBase, IInteractable
 
     public void Interact()
     {
-      
+        Debug.Log("INTERACT");
         if (GameManager.Instance.GameState == GameStates.Activity)
         {
             GameManager.Instance.GameState = GameStates.Walking;

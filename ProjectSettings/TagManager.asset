@@ -10,6 +10,9 @@ TagManager:
   - BoxingTarget
   - CurlingBroom
   - CurlingCart
+  - CurlingCarpet
+  - CurlingCarpet1
+  - CurlingCarpet2
   layers:
   - Default
   - TransparentFX
