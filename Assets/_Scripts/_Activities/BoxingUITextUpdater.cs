@@ -7,5 +7,6 @@ public class BoxingUITextUpdater : UITextUpdater
     public override void SetUpEventListener()
     {
         BoxingController.OnBoxingScoreChanged.AddListener(UpdateText);
+        UpdateText("0");
     }
 }

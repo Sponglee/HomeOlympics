@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class CurlingCartControl : MonoBehaviour
 {
-    
-
-    [SerializeField] private int finalScore = 0;
-    public int FinalScore
+    [SerializeField] private bool EnemyCart = false;
+    [SerializeField]
+    private int reachedTarget = 0;
+    public int ReachedTarget
     {
         get
         {
-            return finalScore;
+            return reachedTarget;
         }
+
+        set
+        {
+            if (EnemyCart)
+                reachedTarget = -value;
+            else
+                reachedTarget = value;
+        }
+    }
+
+    public void ResultReact()
+    {
+        transform.GetComponent<QuickOutline>().enabled = true;
     }
 
 
@@ -20,16 +33,33 @@ public class CurlingCartControl : MonoBehaviour
     {
         if(other.CompareTag("CurlingCarpet"))
         {
-            finalScore = 1;
+            ReachedTarget = 1;
         }
-        else if(other.CompareTag("CurlingCarpet1"))
+        else if (other.CompareTag("CurlingCarpet1"))
         {
-            finalScore = 2;
+            ReachedTarget = 2;
         }
-        else if(other.CompareTag("CurlingCarpet2"))
+        else if (other.CompareTag("CurlingCarpet2"))
         {
-            finalScore = 3;
+            ReachedTarget = 3;
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("CurlingCarpet"))
+        {
+            ReachedTarget = 0;
+        }
+        else if (other.CompareTag("CurlingCarpet1"))
+        {
+            ReachedTarget = 1;
+        }
+        else if (other.CompareTag("CurlingCarpet2"))
+        {
+            ReachedTarget = 2;
+        }
+
     }
 
 }

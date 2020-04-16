@@ -24,6 +24,7 @@ public class CurlingBroomControl : MonoBehaviour
         {
             broomCollider.enabled = false;
             trail.emitting =false;
+            transform.localPosition = new Vector3(-1f, 0f, 0f);
         }
 
        

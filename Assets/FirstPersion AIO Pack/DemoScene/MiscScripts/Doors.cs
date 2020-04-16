@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class Doors : MonoBehaviour {
 
+    public bool CanExit = false;
+    public GameObject doorCanvas;
+
 private void OnTriggerEnter(Collider coll)
 {
     if(coll.CompareTag("Player"))
     {
-	     GetComponent<Animator>().Play("Door_open");
-	     //this.enabled=false;
+            if (CanExit)
+                GetComponent<Animator>().Play("Door_open");
+            else
+                doorCanvas.SetActive(true);
+
     }
 }
 
 
     private void OnTriggerExit(Collider other)
     {
-        GetComponent<Animator>().Play("Door_close");
-        //this.enabled = true;
+        if(CanExit)
+            GetComponent<Animator>().Play("Door_close");
+        else
+            doorCanvas.SetActive(false);
     }
 }

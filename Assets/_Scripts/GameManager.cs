@@ -14,6 +14,9 @@ public class GameManager : Singleton<GameManager>
     public class UpdateStateEvent : UnityEvent<GameStates,Transform> { }
     public static UpdateStateEvent UpdateState = new UpdateStateEvent();
 
+    public class HighlightAllEvent : UnityEvent { }
+    public static HighlightAllEvent OnHighLightAll = new HighlightAllEvent();
+
     public Transform targetedActivity = null;
     public GameStates lastState;
 
@@ -62,6 +65,14 @@ public class GameManager : Singleton<GameManager>
             else
                 GameState = lastState;
         }
+        else if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            OnHighLightAll.Invoke();
+        }
+        else if(Input.GetKeyUp(KeyCode.Tab))
+        {
+            OnHighLightAll.Invoke();
+        }
     }
 
 
@@ -72,7 +83,7 @@ public class GameManager : Singleton<GameManager>
         Debug.Log(name);
         selectionCanvas.gameObject.SetActive(true);
         selectionCanvas.position = target.position;
-        
+        selectionCanvas.GetComponent<ActivitySelectionUI>().UpdateSelectionText(name);
     }
 
     public void DeselectActivity()

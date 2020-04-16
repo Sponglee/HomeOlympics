@@ -1,15 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CurlingCarpetControl : MonoBehaviour
 {
-    public Transform directionTarget;
+    //public class CarpetEnteredEvent : UnityEvent<Transform> { }
+    //public static CarpetEnteredEvent OnCarpetEntered = new CarpetEnteredEvent();
 
+    public Transform directionTarget;
+    public Transform TargetsHolder{get{return targetsHolder;}}
+
+    [SerializeField] private Transform cartsHolder;
     [SerializeField] private Transform targetsHolder;
     [SerializeField] private GameObject targetPref;
     [SerializeField] private float carpetRadius = 1.5f;
-    public void SpawnTargets()
+
+    public void CurlingSpawnTargets()
     {
         
         for (int i = 0; i < 3; i++)

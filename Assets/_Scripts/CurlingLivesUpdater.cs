@@ -8,7 +8,7 @@ public class CurlingLivesUpdater : UIRankImagesUpdater
 
     public override void SetUpEventListener()
     {
-        CurlingController.OnLivesChanged.AddListener(UpdateImage);
+        CurlingController.OnCurlingLivesChanged.AddListener(UpdateImage);
     }
 
     public override void UpdateImage(int lives)

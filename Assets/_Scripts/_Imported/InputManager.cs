@@ -17,7 +17,8 @@ public class InputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        joystick.gameObject.SetActive(false);
+        if(joystick != null)
+            joystick.gameObject.SetActive(false);
     }
 
     void Update()

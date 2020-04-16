@@ -33,14 +33,25 @@ public class ActivityStateChange : StateChangeBase, IInteractable
         }
     }
 
+    private void Start()
+    {
+        GameManager.OnHighLightAll.AddListener(HighlightActivity);
+    }
+
+    public void HighlightActivity()
+    {
+            transform.GetComponent<QuickOutline>().enabled = !transform.GetComponent<QuickOutline>().isActiveAndEnabled;
+    }
 
     public void Select()
     {
         GameManager.Instance.SelectActivity(transform, activityName);
+        HighlightActivity();
     }
 
     public void Deselect()
     {
         GameManager.Instance.DeselectActivity();
+        HighlightActivity();
     }
 }

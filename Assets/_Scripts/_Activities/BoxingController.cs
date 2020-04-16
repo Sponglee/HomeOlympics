@@ -14,9 +14,7 @@ public class BoxingController : ActivityControllerBase
     public class BoxingTimerUpdateEvent : UnityEvent<int> { }
     public static BoxingTimerUpdateEvent OnBoxingTimerChanged = new BoxingTimerUpdateEvent();
 
-    public AudioSource boxingAudio;
-
-
+   
     [SerializeField] private GameObject boxingTargetPref;
     [SerializeField] private Transform boxingTargetLocations;
     [SerializeField] private Canvas boxingTargetsCanvas;
