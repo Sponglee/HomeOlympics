@@ -59,6 +59,8 @@ public class BoxingController : ActivityControllerBase
             else
             {
                 hookController.CanHook = false;
+
+                OpenResults();
             }
         }
     }

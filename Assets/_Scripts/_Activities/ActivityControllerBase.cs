@@ -12,7 +12,7 @@ public class ActivityControllerBase : MonoBehaviour
 
         FunctionHandler.Instance.ToggleUI(transform.GetComponent<ActivityStateChange>().activityName);
         if (activityUI != null)
-            activityUI.SetActive(!activityUI.activeSelf);
+            activityUI.SetActive(true);
     }
     public void DeactivateActivity()
     {
@@ -22,10 +22,17 @@ public class ActivityControllerBase : MonoBehaviour
 
         if (activityUI != null)
         {
-            activityUI.SetActive(!activityUI.activeSelf);
+            activityUI.SetActive(false);
         }
     }
 
     public virtual void DeInitializeActivity() { }
     public virtual void InitializeActivity() { }
+
+
+    public void OpenResults()
+    {
+        activityUI.SetActive(false);
+        GameManager.Instance.ToggleResultSequence();
+    }
 }

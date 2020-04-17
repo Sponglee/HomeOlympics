@@ -20,14 +20,19 @@ public class ActivityStateChange : StateChangeBase, IInteractable
 
     public void Interact()
     {
-        Debug.Log("INTERACT");
         if (GameManager.Instance.GameState == GameStates.Activity)
         {
+            Debug.Log("Select");
             GameManager.Instance.GameState = GameStates.Walking;
+            if(GameManager.Instance.resultsCanvas.activeSelf)
+            {
+                GameManager.Instance.ToggleResultSequence();
+            }
             Select();
         }
         else
         {
+            Debug.Log("Deselect");
             GameManager.Instance.GameState = GameStates.Activity;
             Deselect();
         }
@@ -54,4 +59,6 @@ public class ActivityStateChange : StateChangeBase, IInteractable
         GameManager.Instance.DeselectActivity();
         HighlightActivity();
     }
+
+
 }

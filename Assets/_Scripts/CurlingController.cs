@@ -83,10 +83,8 @@ public class CurlingController : ActivityControllerBase
                 curlingRound = 3;
                 CanBePushed = false;
                 StopAllCoroutines();
-                ///
-                //Results sequence
-                ///
-                //ResultsSequence();
+
+                OpenResults();
             }
         }
     }
@@ -96,7 +94,7 @@ public class CurlingController : ActivityControllerBase
         curlingContent.gameObject.SetActive(true);
         curlingHide.gameObject.SetActive(false);
 
-        SpawnCart();
+        CheckCartRespawn();
         carpetControl.CurlingSpawnTargets();
     }
 
@@ -113,7 +111,7 @@ public class CurlingController : ActivityControllerBase
         DespawnCarts();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         arrow.LookAt(carpetControl.directionTarget, Vector3.up);
 
@@ -121,7 +119,7 @@ public class CurlingController : ActivityControllerBase
         {
             if (ActiveCartPushed && activeCartRb.velocity == Vector3.zero)
             {
-                CheckCartRespawn(activeCart);
+                CheckCartRespawn();
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -162,7 +160,7 @@ public class CurlingController : ActivityControllerBase
         DespawnCarts();
 
         carpetControl.CurlingSpawnTargets();
-        SpawnCart();
+        CheckCartRespawn();
 
         CurlingRound++;
         CurlingLives = 3;
@@ -199,7 +197,7 @@ public class CurlingController : ActivityControllerBase
         CanBePushed = true;
     }
 
-    public void CheckCartRespawn(Transform targetCart)
+    public void CheckCartRespawn()
     {
         //if(targetCart != null && targetCart.GetComponent<CurlingCartControl>().ReachedTarget==0)
         //{
@@ -223,7 +221,6 @@ public class CurlingController : ActivityControllerBase
 
     private void SpawnCart()
     {
-        CameraManager.Instance.SetLive(vCamLaunch);
         Invoke(nameof(ActiveCartStartDelay), 0.5f);
         GameObject tmpCart = Instantiate(cartPref, cartHolder);
         activeCart = tmpCart.transform;
@@ -235,6 +232,7 @@ public class CurlingController : ActivityControllerBase
         arrow.gameObject.SetActive(true);
         carpetControl.directionTarget.gameObject.SetActive(true);
         StartCoroutine(carpetControl.MoveCarpetTarget());
+        //CameraManager.Instance.SetLive(vCamLaunch);
     }
 
     private void DespawnCarts()

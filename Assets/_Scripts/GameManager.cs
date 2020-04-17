@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     public Transform targetedActivity = null;
     public GameStates lastState;
 
-    
+    public GameObject resultsCanvas;
     [SerializeField] private GameStates gameState;
     [SerializeField] private Transform selectionCanvas;
 
@@ -90,4 +90,11 @@ public class GameManager : Singleton<GameManager>
     {
         selectionCanvas.gameObject.SetActive(false);
     }
+
+    public void ToggleResultSequence()
+    {
+        resultsCanvas.SetActive(!resultsCanvas.activeSelf);
+    }
+
+
 }

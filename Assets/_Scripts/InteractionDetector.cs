@@ -25,7 +25,7 @@ public class InteractionDetector : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log(">>" + other.gameObject.name);
+            Debug.Log("INTERACTED >>" + other.gameObject.name);
             if (other.GetComponent<IInteractable>() != null)
             {
                 other.GetComponent<IInteractable>().Interact();
