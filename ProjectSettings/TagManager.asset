@@ -7,12 +7,14 @@ TagManager:
   - Fluid
   - VCam
   - Hook
-  - BoxingTarget
   - CurlingBroom
   - CurlingCart
   - CurlingCarpet
   - CurlingCarpet1
   - CurlingCarpet2
+  - BoxingTargetLeft
+  - BoxingTargetRight
+  - BoxingTarget
   layers:
   - Default
   - TransparentFX

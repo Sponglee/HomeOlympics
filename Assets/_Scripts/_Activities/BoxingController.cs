@@ -15,7 +15,7 @@ public class BoxingController : ActivityControllerBase
     public static BoxingTimerUpdateEvent OnBoxingTimerChanged = new BoxingTimerUpdateEvent();
 
    
-    [SerializeField] private GameObject boxingTargetPref;
+    public GameObject[] boxingTargetPrefs;
     [SerializeField] private Transform boxingTargetLocations;
     [SerializeField] private Canvas boxingTargetsCanvas;
     [SerializeField] private Transform boxingTargetsHolder;
@@ -140,12 +140,14 @@ public class BoxingController : ActivityControllerBase
     {
         GameTimer = 60;
         BoxingScores = 0;
-
-        foreach (Transform child in boxingTargetsHolder)
+        foreach (Transform childHolder in boxingTargetsHolder)
         {
-            Destroy(child.gameObject);
-
+            foreach (Transform child in childHolder)
+            {
+                Destroy(child.gameObject);
+            }
         }
+      
         boxingTargets.Clear();
 
         hookController.RetractAll();
@@ -170,11 +172,13 @@ public class BoxingController : ActivityControllerBase
 
             spawnIndexes.Add(index);
 
+            int spawnSide = Random.Range(0, boxingTargetPrefs.Length);
+            //Debug.Log(spawnSide);
             Vector3 targetPosition = boxingTargetLocations.GetChild(index).position;
-            GameObject tmpTarget = Instantiate(boxingTargetPref
+            GameObject tmpTarget = Instantiate(boxingTargetPrefs[spawnSide]
                                                 , targetPosition
                                                 , Quaternion.LookRotation(Camera.main.transform.position - transform.position, Vector3.up)
-                                                , boxingTargetsHolder);
+                                                , boxingTargetsHolder.GetChild(spawnSide));
             boxingTargets.Add(tmpTarget);
 
         }
