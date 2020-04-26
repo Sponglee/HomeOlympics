@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class InteractionDetector : MonoBehaviour
 {
+    [SerializeField] private Transform interactionTarget;
+
+    private void Start()
+    {
+        GameManager.OnInteractButtonPressed.AddListener(InteractionHandler);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(GameManager.Instance.GameState != GameStates.Activity && other.GetComponent<IInteractable>() != null)
         {
             other.GetComponent<IInteractable>().Select();
+            interactionTarget = other.transform;
         }
     }
 
@@ -18,18 +26,16 @@ public class InteractionDetector : MonoBehaviour
         if (GameManager.Instance.GameState != GameStates.Activity && other.GetComponent<IInteractable>() != null)
         {
             other.GetComponent<IInteractable>().Deselect();
+            interactionTarget = null;
         }
     }
 
-    private void OnTriggerStay(Collider other)
+ 
+    public void InteractionHandler()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (interactionTarget.GetComponent<IInteractable>() != null)
         {
-            Debug.Log("INTERACTED >>" + other.gameObject.name);
-            if (other.GetComponent<IInteractable>() != null)
-            {
-                other.GetComponent<IInteractable>().Interact();
-            }
+            interactionTarget.GetComponent<IInteractable>().Interact();
         }
     }
 }

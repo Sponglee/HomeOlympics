@@ -18,7 +18,7 @@ public class HookCollisionChecker : MonoBehaviour
     {
         if(!HasCollided)
         {
-            Debug.Log(boxingController.boxingTargetPrefs[handIndex].tag + " : " + other.transform.tag);
+            //Debug.Log(boxingController.boxingTargetPrefs[handIndex].tag + " : " + other.transform.tag);
             if (other.transform.CompareTag(boxingController.boxingTargetPrefs[handIndex].tag))
             {
                 HasCollided = true;

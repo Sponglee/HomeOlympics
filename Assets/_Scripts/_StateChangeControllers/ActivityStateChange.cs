@@ -22,7 +22,7 @@ public class ActivityStateChange : StateChangeBase, IInteractable
     {
         if (GameManager.Instance.GameState == GameStates.Activity)
         {
-            Debug.Log("Select");
+            //Debug.Log("Select");
             GameManager.Instance.GameState = GameStates.Walking;
             if(GameManager.Instance.resultsCanvas.activeSelf)
             {
@@ -32,7 +32,7 @@ public class ActivityStateChange : StateChangeBase, IInteractable
         }
         else
         {
-            Debug.Log("Deselect");
+            //Debug.Log("Deselect");
             GameManager.Instance.GameState = GameStates.Activity;
             Deselect();
         }

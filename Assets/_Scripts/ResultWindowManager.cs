@@ -2,14 +2,23 @@
 using TMPro;
 using UnityEngine.UI;
 
+
+
 public class ResultWindowManager : MonoBehaviour
 {
-    public Image playerFlag;
-    public TextMeshProUGUI playerName;
-    public TextMeshProUGUI labelText;
-    public TextMeshProUGUI scoreText;
+    
+    public GameObject resultRowPref;
+    public Transform resultsContainer;
+    public ResultRowController currentPlayerRow;
 
 
+    private void UpdateCurrentResultWindow(string score, int medalColorIndex)
+    {
+        currentPlayerRow.UpdateRowInfo(PlayerDataManager.Instance.name, score, PlayerDataManager.Instance.playerFlag, PlayerDataManager.Instance.medalColors[medalColorIndex]);
+    }
 
-
+    private void SpawnLeaders()
+    {
+        
+    }
 }

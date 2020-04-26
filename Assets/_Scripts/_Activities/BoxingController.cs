@@ -60,7 +60,7 @@ public class BoxingController : ActivityControllerBase
             {
                 hookController.CanHook = false;
 
-                OpenResults();
+                ToggleActivityUIForResults();
             }
         }
     }
@@ -69,7 +69,7 @@ public class BoxingController : ActivityControllerBase
 
     public override void InitializeActivity()
     {
-        Debug.Log(">"+gameObject.name);
+        //Debug.Log(">"+gameObject.name);
         boxingTargetsCanvas.gameObject.SetActive(true);
         boxingHands.SetActive(true);
         InitializeGamePlay();
@@ -78,7 +78,7 @@ public class BoxingController : ActivityControllerBase
 
     public override void DeInitializeActivity()
     {
-        Debug.Log("<"+gameObject.name);
+        //Debug.Log("<"+gameObject.name);
         boxingTargetsCanvas.gameObject.SetActive(false);
         boxingHands.SetActive(false);
         KillGamePlay();
@@ -89,7 +89,7 @@ public class BoxingController : ActivityControllerBase
 
     public void InitializeGamePlay()
     {
-        Debug.Log(">>><<<><>><><");
+        //Debug.Log(">>><<<><>><><");
         //Gamestuff here
         ResetGamePlay();
 

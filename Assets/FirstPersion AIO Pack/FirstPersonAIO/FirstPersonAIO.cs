@@ -280,7 +280,7 @@ public class BETA_SETTINGS{
     {
         if (lockAndHideCursor)
         {
-            Debug.Log("LOCK");
+            //Debug.Log("LOCK");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             if (crossHair!=null)

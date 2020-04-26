@@ -17,6 +17,9 @@ public class GameManager : Singleton<GameManager>
     public class HighlightAllEvent : UnityEvent { }
     public static HighlightAllEvent OnHighLightAll = new HighlightAllEvent();
 
+    public class InteractionEvent : UnityEvent { }
+    public static InteractionEvent OnInteractButtonPressed = new InteractionEvent();
+
     public Transform targetedActivity = null;
     public GameStates lastState;
 
@@ -38,7 +41,7 @@ public class GameManager : Singleton<GameManager>
             }
             gameState = value;
             UpdateState.Invoke(value, targetedActivity);
-            Debug.Log(value);
+            //Debug.Log(value);
         }
     }
 
@@ -73,6 +76,11 @@ public class GameManager : Singleton<GameManager>
         {
             OnHighLightAll.Invoke();
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            OnInteractButtonPressed.Invoke();
+        }
     }
 
 
@@ -80,7 +88,7 @@ public class GameManager : Singleton<GameManager>
     public void SelectActivity(Transform target, string name)
     {
         targetedActivity = target;
-        Debug.Log(name);
+        //Debug.Log(name);
         selectionCanvas.gameObject.SetActive(true);
         selectionCanvas.position = target.position;
         selectionCanvas.GetComponent<ActivitySelectionUI>().UpdateSelectionText(name);

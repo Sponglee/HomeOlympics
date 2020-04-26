@@ -30,9 +30,10 @@ public class ActivityControllerBase : MonoBehaviour
     public virtual void InitializeActivity() { }
 
 
-    public void OpenResults()
+    public void ToggleActivityUIForResults()
     {
         activityUI.SetActive(false);
         GameManager.Instance.ToggleResultSequence();
     }
+
 }

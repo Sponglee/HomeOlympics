@@ -9,7 +9,7 @@ public class WalkingStateAction : StateChangeBase
 
     public override void StateChangeActionOff()
     {
-        Debug.Log("off");
+        //Debug.Log("off");
         fpsController.enabled = false;
         fpsController.GetComponent<Rigidbody>().isKinematic = true;
         fpsController.GetComponent<CapsuleCollider>().isTrigger = true;
@@ -18,7 +18,7 @@ public class WalkingStateAction : StateChangeBase
 
     public override void StateChangeActionOn()
     {
-        Debug.Log("on");
+        //Debug.Log("on");
         fpsController.enabled = true;
         fpsController.GetComponent<Rigidbody>().isKinematic = false;
         fpsController.GetComponent<CapsuleCollider>().isTrigger = false;

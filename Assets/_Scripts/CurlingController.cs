@@ -61,8 +61,13 @@ public class CurlingController : ActivityControllerBase
         set
         {
             if(value != curlingScore)
+            {
+                if (value < 0)
+                    value = 0;
+                curlingScore = value;
                 OnCurlingScoreChanged.Invoke(value.ToString());
-            curlingScore = value;
+
+            }
         }
     }
 
@@ -81,10 +86,10 @@ public class CurlingController : ActivityControllerBase
             if (curlingRound > 3)
             {
                 curlingRound = 3;
-                CanBePushed = false;
+               
                 StopAllCoroutines();
 
-                OpenResults();
+                ToggleActivityUIForResults();
             }
         }
     }
@@ -113,6 +118,17 @@ public class CurlingController : ActivityControllerBase
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (ActiveCartPushed != true && CanBePushed)
+            {
+                LaunchCart();
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
         arrow.LookAt(carpetControl.directionTarget, Vector3.up);
 
         if (activeCart != null && CanBePushed)
@@ -120,14 +136,6 @@ public class CurlingController : ActivityControllerBase
             if (ActiveCartPushed && activeCartRb.velocity == Vector3.zero)
             {
                 CheckCartRespawn();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (ActiveCartPushed != true)
-                {
-                    LaunchCart();
-                }
             }
         }
           
@@ -182,6 +190,9 @@ public class CurlingController : ActivityControllerBase
 
     private void LaunchCart()
     {
+        Invoke(nameof(ActiveCartStartDelay), 1f);
+        CanBePushed = false; 
+        Debug.Log("Pushed");
         CurlingLives--;
         activeCartRb.AddForce(new Vector3(arrow.forward.x, activeCartRb.velocity.y, arrow.forward.z) * cartForce);
         activeCart.LookAt(carpetControl.directionTarget, Vector3.up);
@@ -199,6 +210,7 @@ public class CurlingController : ActivityControllerBase
 
     public void CheckCartRespawn()
     {
+        Debug.Log("CHECK " + CanBePushed);
         //if(targetCart != null && targetCart.GetComponent<CurlingCartControl>().ReachedTarget==0)
         //{
         //    StartCoroutine(DisableFailedCart(targetCart));
