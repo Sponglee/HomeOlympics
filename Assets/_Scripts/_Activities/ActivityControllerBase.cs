@@ -42,10 +42,15 @@ public class ActivityControllerBase : MonoBehaviour
         {
             ResultWindowManager.Instance.OpenResultWindow();
             Debug.Log(tmpInfo.ActivityName + " = " + tmpInfo.ActivityScore);
-            ResultWindowManager.OnResultsOpened.Invoke(tmpInfo);
+            StartCoroutine(ResultsInvokeDelay(tmpInfo));
         }
 
        
     }
 
+    private IEnumerator ResultsInvokeDelay(ActivityResultInfo tmpInfo)
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        ResultWindowManager.OnResultsOpened.Invoke(tmpInfo);
+    }
 }

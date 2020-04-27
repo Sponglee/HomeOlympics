@@ -11,7 +11,7 @@ public class ScrollText : MonoBehaviour
     void Start()
     {
         scrollTextRect = gameObject.GetComponent<RectTransform>();
-        resetCoord = scrollTextRect.rect.width;
+        //resetCoord = scrollTextRect.rect.width;
     }
 
     // Update is called once per frame

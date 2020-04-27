@@ -33,7 +33,7 @@ public class InteractionDetector : MonoBehaviour
  
     public void InteractionHandler()
     {
-        if (interactionTarget.GetComponent<IInteractable>() != null)
+        if (interactionTarget != null && interactionTarget.GetComponent<IInteractable>() != null)
         {
             interactionTarget.GetComponent<IInteractable>().Interact();
         }

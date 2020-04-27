@@ -6,7 +6,8 @@ public enum GameStates
     Walking,
     Activity,
     Result,
-    Paused
+    Paused,
+    Bed
 }
 
 public class GameManager : Singleton<GameManager>
@@ -53,6 +54,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         GameState = GameStates.Paused;
+        lastState = GameStates.Activity;
     }
 
 

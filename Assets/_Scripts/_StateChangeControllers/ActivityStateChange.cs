@@ -56,6 +56,7 @@ public class ActivityStateChange : StateChangeBase, IInteractable
 
     public void Deselect()
     {
+       
         GameManager.Instance.DeselectActivity();
         HighlightActivity();
     }
