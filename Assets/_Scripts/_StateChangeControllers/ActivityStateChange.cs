@@ -24,9 +24,9 @@ public class ActivityStateChange : StateChangeBase, IInteractable
         {
             //Debug.Log("Select");
             GameManager.Instance.GameState = GameStates.Walking;
-            if(GameManager.Instance.resultsCanvas.activeSelf)
+            if(ResultWindowManager.Instance.canvasHolder.gameObject.activeSelf)
             {
-                GameManager.Instance.ToggleResultSequence();
+                ResultWindowManager.Instance.CloseResultWindow();
             }
             Select();
         }

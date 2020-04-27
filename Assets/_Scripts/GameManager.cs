@@ -99,10 +99,5 @@ public class GameManager : Singleton<GameManager>
         selectionCanvas.gameObject.SetActive(false);
     }
 
-    public void ToggleResultSequence()
-    {
-        resultsCanvas.SetActive(!resultsCanvas.activeSelf);
-    }
-
-
+  
 }

@@ -60,7 +60,7 @@ public class BoxingController : ActivityControllerBase
             {
                 hookController.CanHook = false;
 
-                ToggleActivityUIForResults();
+                ToggleActivityUIForResults(BoxingScores.ToString());
             }
         }
     }

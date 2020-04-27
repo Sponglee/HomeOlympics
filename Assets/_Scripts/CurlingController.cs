@@ -89,7 +89,7 @@ public class CurlingController : ActivityControllerBase
                
                 StopAllCoroutines();
 
-                ToggleActivityUIForResults();
+                ToggleActivityUIForResults(CurlingScore.ToString());
             }
         }
     }

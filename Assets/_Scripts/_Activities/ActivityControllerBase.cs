@@ -30,10 +30,22 @@ public class ActivityControllerBase : MonoBehaviour
     public virtual void InitializeActivity() { }
 
 
-    public void ToggleActivityUIForResults()
+    public void ToggleActivityUIForResults(string score)
     {
         activityUI.SetActive(false);
-        GameManager.Instance.ToggleResultSequence();
+
+        ActivityResultInfo tmpInfo = new ActivityResultInfo();
+        tmpInfo.ActivityName = transform.GetComponent<ActivityStateChange>().activityName;
+        tmpInfo.ActivityScore = score;
+
+        if (!GameManager.Instance.resultsCanvas.activeSelf)
+        {
+            ResultWindowManager.Instance.OpenResultWindow();
+            Debug.Log(tmpInfo.ActivityName + " = " + tmpInfo.ActivityScore);
+            ResultWindowManager.OnResultsOpened.Invoke(tmpInfo);
+        }
+
+       
     }
 
 }
