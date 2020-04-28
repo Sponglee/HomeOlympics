@@ -51,7 +51,7 @@ public class BedController : ActivityControllerBase
         hide.gameObject.SetActive(true);
         remote.gameObject.SetActive(false);
 
-        transform.GetComponent<ActivityStateChange>().Deselect();
+        
 
         base.DeInitializeActivity();
     }
@@ -61,6 +61,7 @@ public class BedController : ActivityControllerBase
         Cursor.visible = false;
         remote.gameObject.SetActive(true);
         hide.gameObject.SetActive(false);
+       
         base.InitializeActivity();
     }
 }
