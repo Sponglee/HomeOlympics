@@ -29,6 +29,8 @@ public class BedController : ActivityControllerBase
         }
     }
 
+    
+
     private void Update()
     {
         Vector3 temp = Input.mousePosition;
@@ -48,6 +50,9 @@ public class BedController : ActivityControllerBase
         
         hide.gameObject.SetActive(true);
         remote.gameObject.SetActive(false);
+
+        transform.GetComponent<ActivityStateChange>().Deselect();
+
         base.DeInitializeActivity();
     }
 
