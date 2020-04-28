@@ -89,6 +89,8 @@ public class CurlingController : ActivityControllerBase
                
                 StopAllCoroutines();
 
+                StopBackSound();
+                AudioManager.Instance.PlaySound("curling_cheer");
                 ToggleActivityUIForResults(CurlingScore.ToString());
             }
         }
@@ -96,6 +98,7 @@ public class CurlingController : ActivityControllerBase
 
     public override void InitializeActivity()
     {
+        Cursor.visible = false;
         curlingContent.gameObject.SetActive(true);
         curlingHide.gameObject.SetActive(false);
 
@@ -105,6 +108,7 @@ public class CurlingController : ActivityControllerBase
 
     public override void DeInitializeActivity()
     {
+        AudioManager.Instance.StopSound("curling_cheer");
         curlingContent.gameObject.SetActive(false);
         curlingHide.gameObject.SetActive(true);
 

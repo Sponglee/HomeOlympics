@@ -282,7 +282,7 @@ public class BETA_SETTINGS{
         {
             //Debug.Log("LOCK");
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.visible = false;
             if (crossHair!=null)
                 crossHair.enabled = true;
         }
@@ -293,7 +293,7 @@ public class BETA_SETTINGS{
         if (lockAndHideCursor)
         {
             Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.visible = true;
             if(crossHair != null)
                 crossHair.enabled = false;
         }

@@ -16,7 +16,7 @@ public class Sound
     [Range(0f, 0.5f)]
     public float randomPitch = 0.1f;
 
-
+   
     //get all the clips to the 'pool'
     public void SetSource(AudioSource _source)
     {
@@ -26,12 +26,31 @@ public class Sound
 
     public void Play(bool sheduled = false)
     {
-        source.volume = volume;
-        source.pitch = pitch * (1 + Random.Range(-randomPitch / 2, randomPitch / 2));
-        if (sheduled)
-            source.PlayScheduled(0.1f);
-        else
-            source.Play();   
+        if(source != null)
+        {
+            source.volume = volume;
+            source.pitch = pitch * (1 + Random.Range(-randomPitch / 2, randomPitch / 2));
+            if (sheduled)
+                source.PlayScheduled(0.1f);
+            else
+                source.Play();
+        }
+       
+    }
+
+    public void Stop()
+    {
+        if(source != null)
+            source.Stop();
+    }
+
+    public void CreateSoundObject(string name)
+    {
+        GameObject _go = new GameObject(name);
+        _go.transform.SetParent(AudioManager.Instance.transform);
+        //set the source
+        this.SetSource(_go.AddComponent<AudioSource>());
+        
     }
 }
 
@@ -56,10 +75,7 @@ public class AudioManager : Singleton<AudioManager>
 
         for (int i = 0; i < sounds.Length; i++)
         {
-            GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
-            _go.transform.SetParent(this.transform);
-            //set the source
-            sounds[i].SetSource(_go.AddComponent<AudioSource>());
+            sounds[i].CreateSoundObject(sounds[i].name);
         }
     }
 
@@ -69,15 +85,6 @@ public class AudioManager : Singleton<AudioManager>
         {
             if (sounds[i].name == _name)
             {
-                if (sounds[i].name == "rotationClick" || sounds[i].name == "256")
-                {
-                    sounds[i].Play(true);
-                }
-                else if (sounds[i].name == "powerup")
-                {
-                    sounds[i].Play(true);
-                }
-                else
                     sounds[i].Play();
                 
                 return;
@@ -87,7 +94,20 @@ public class AudioManager : Singleton<AudioManager>
         Debug.Log("AudioManager: no sounds like that " + _name);
     }
 
+    public void StopSound(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].name == _name)
+            {
+                sounds[i].Stop();
 
+                return;
+            }
+        }
+        //no sounds with that name
+        Debug.Log("AudioManager: no sounds like that " + _name);
+    }
 
 
     public void VolumeChange (float value)

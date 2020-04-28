@@ -18,6 +18,7 @@ public class CurlingBroomControl : MonoBehaviour
         else if(Input.GetMouseButton(0))
         {
             transform.localPosition = new Vector3(inputManager.input.x, 0f, transform.localPosition.z);
+          
 
         }
         else if(Input.GetMouseButtonUp(0))

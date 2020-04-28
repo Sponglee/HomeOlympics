@@ -28,6 +28,13 @@ public class CurlingCartControl : MonoBehaviour
         transform.GetComponent<QuickOutline>().enabled = true;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.CompareTag("CurlingCart"))
+        {
+            AudioManager.Instance.PlaySound("curling_hit");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {

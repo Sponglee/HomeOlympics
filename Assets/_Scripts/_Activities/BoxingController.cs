@@ -69,7 +69,8 @@ public class BoxingController : ActivityControllerBase
 
     public override void InitializeActivity()
     {
-        //Debug.Log(">"+gameObject.name);
+        //Debug.Log(">"+gameObject.name); 
+        Cursor.visible = true;
         boxingTargetsCanvas.gameObject.SetActive(true);
         boxingHands.SetActive(true);
         InitializeGamePlay();
@@ -78,6 +79,7 @@ public class BoxingController : ActivityControllerBase
 
     public override void DeInitializeActivity()
     {
+        Cursor.visible = false;
         //Debug.Log("<"+gameObject.name);
         boxingTargetsCanvas.gameObject.SetActive(false);
         boxingHands.SetActive(false);
@@ -93,7 +95,7 @@ public class BoxingController : ActivityControllerBase
         //Gamestuff here
         ResetGamePlay();
 
-       
+        Cursor.visible = true;
         StartCoroutine(StartBoxingGame());
     }
 

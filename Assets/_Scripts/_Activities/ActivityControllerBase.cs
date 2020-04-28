@@ -5,19 +5,48 @@ using UnityEngine;
 public class ActivityControllerBase : MonoBehaviour
 {
     public GameObject activityUI;
+    public Sound[] backgroundSound;
+
+    private int currentBackSound = -1;
 
     public void ActivateActivity()
     {
         InitializeActivity();
 
+        if(backgroundSound.Length>0)
+        {
+            currentBackSound = Random.Range(0, backgroundSound.Length);
+
+            if(!AudioManager.Instance.transform.Find(backgroundSound[currentBackSound].name + currentBackSound))
+            {
+                backgroundSound[currentBackSound].CreateSoundObject(backgroundSound[currentBackSound].name + currentBackSound);
+            }
+            
+
+            backgroundSound[currentBackSound].Play();
+        }
+
+
+
         FunctionHandler.Instance.ToggleUI(transform.GetComponent<ActivityStateChange>().activityName);
         if (activityUI != null)
             activityUI.SetActive(true);
     }
+
+    public void StopBackSound()
+    {
+        if (currentBackSound >= 0)
+        {
+            backgroundSound[currentBackSound].Stop();
+        }
+    }
+
     public void DeactivateActivity()
     {
-        DeInitializeActivity();
 
+        StopBackSound();
+
+        DeInitializeActivity();
         FunctionHandler.Instance.ToggleUI("0");
 
         if (activityUI != null)
@@ -25,6 +54,7 @@ public class ActivityControllerBase : MonoBehaviour
             activityUI.SetActive(false);
         }
     }
+
 
     public virtual void DeInitializeActivity() { }
     public virtual void InitializeActivity() { }
