@@ -32,7 +32,7 @@ public class ResultWindowManager : Singleton<ResultWindowManager>
         Debug.Log(resultInfo.ActivityName + " : " + resultInfo.ActivityScore);
         int medalColorIndex = 0;
         activityResultName.text = resultInfo.ActivityName;
-        currentPlayerRow.UpdateRowInfo(PlayerInfoManager.Instance.name, resultInfo.ActivityScore, PlayerInfoManager.Instance.playerFlag, PlayerInfoManager.Instance.medalColors[medalColorIndex]);
+        currentPlayerRow.UpdateRowInfo(PlayerInfoManager.Instance.playerName, resultInfo.ActivityScore, PlayerInfoManager.Instance.playerFlag, PlayerInfoManager.Instance.medalColors[medalColorIndex]);
     }
 
 

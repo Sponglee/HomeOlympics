@@ -1,7 +1,16 @@
 fileFormatVersion: 2
-guid: f8206d37fd33b334189a5134888ae13f
+guid: c4ddad674ff16f74ea334be68fe3d487
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -565026809772026165
+    second: HomeOlymp_0
+  - first:
+      213: -265207505743373180
+    second: HomeOlymp_1
+  - first:
+      213: -2113234290710729983
+    second: HomeOlymp_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -120,11 +129,74 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: HomeOlymp_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 613
+        width: 758
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc657f23c1f9828f0800000000000000
+      internalID: -565026809772026165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HomeOlymp_1
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 542
+        width: 730
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48c166cbd2bc15cf0800000000000000
+      internalID: -265207505743373180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HomeOlymp_2
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 292
+        width: 720
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b2307eb984ca2e0800000000000000
+      internalID: -2113234290710729983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 2b5d91deac6db1d47a4d7fd5bf05db63
     internalID: 0
     vertices: []
     indices: 

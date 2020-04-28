@@ -2,16 +2,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerInfoManager : Singleton<PlayerInfoManager>
 {
     
     public Sprite[] flags;
 
-    [SerializeField] private Dropdown dropDown;
+    [SerializeField] private TMP_Dropdown dropDown;
     [SerializeField] private InputField inputField;
 
-    public string name;
+    public string playerName;
     public Sprite playerFlag;
 
     public Color[] medalColors;
@@ -20,7 +21,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
     {
         if(level == 1)
         {
-            name = PlayerPrefs.GetString("PlayerName", "Player1");
+            playerName = PlayerPrefs.GetString("PlayerName", "Player1");
             playerFlag = GrabFlagImage(PlayerPrefs.GetString("PlayerFlag", "us"));
         }
     }
@@ -46,11 +47,11 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
     {
         dropDown.ClearOptions();
 
-        List<Dropdown.OptionData> flagItems = new List<Dropdown.OptionData>();
+        List<TMP_Dropdown.OptionData> flagItems = new List<TMP_Dropdown.OptionData>();
 
         foreach (var flag in flags)
         {
-            var flagOption = new Dropdown.OptionData(flag.name, flag);
+            var flagOption = new TMP_Dropdown.OptionData(flag.name, flag);
             flagItems.Add(flagOption);
         }
 

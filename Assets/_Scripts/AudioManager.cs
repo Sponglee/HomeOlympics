@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using UnityEngine;
 
 //audio manager object class on scene load
@@ -16,6 +17,7 @@ public class Sound
     [Range(0f, 0.5f)]
     public float randomPitch = 0.1f;
 
+    
    
     //get all the clips to the 'pool'
     public void SetSource(AudioSource _source)
@@ -46,8 +48,11 @@ public class Sound
 
     public void CreateSoundObject(string name)
     {
+       
+
         GameObject _go = new GameObject(name);
         _go.transform.SetParent(AudioManager.Instance.transform);
+        this.volume = PlayerPrefs.GetFloat("PlayerVolume", 1f);
         //set the source
         this.SetSource(_go.AddComponent<AudioSource>());
         
@@ -61,7 +66,7 @@ public class AudioManager : Singleton<AudioManager>
 {
 
     [SerializeField]
-    Sound[] sounds;
+    public List<Sound> sounds = new List<Sound>();
 
 
 
@@ -73,7 +78,7 @@ public class AudioManager : Singleton<AudioManager>
             Destroy(gameObject);
         }
 
-        for (int i = 0; i < sounds.Length; i++)
+        for (int i = 0; i < sounds.Count; i++)
         {
             sounds[i].CreateSoundObject(sounds[i].name);
         }
@@ -81,12 +86,11 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySound(string _name)
     {
-        for (int i = 0; i < sounds.Length; i++)
+        for (int i = 0; i < sounds.Count; i++)
         {
             if (sounds[i].name == _name)
             {
-                    sounds[i].Play();
-                
+                sounds[i].Play();
                 return;
             }
         }
@@ -96,7 +100,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void StopSound(string _name)
     {
-        for (int i = 0; i < sounds.Length; i++)
+        for (int i = 0; i < sounds.Count; i++)
         {
             if (sounds[i].name == _name)
             {
@@ -112,8 +116,8 @@ public class AudioManager : Singleton<AudioManager>
 
     public void VolumeChange (float value)
     {
-        PlayerPrefs.SetFloat("Volume", value);
-        for (int i = 0; i < sounds.Length; i++)
+        PlayerPrefs.SetFloat("PlayerVolume", value);
+        for (int i = 0; i < sounds.Count; i++)
         {
             sounds[i].volume = value;
         }

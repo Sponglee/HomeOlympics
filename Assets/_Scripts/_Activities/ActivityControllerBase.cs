@@ -22,6 +22,7 @@ public class ActivityControllerBase : MonoBehaviour
             if(!AudioManager.Instance.transform.Find(backgroundSound[currentBackSound].name + currentBackSound))
             {
                 backgroundSound[currentBackSound].CreateSoundObject(backgroundSound[currentBackSound].name + currentBackSound);
+                AudioManager.Instance.sounds.Add(backgroundSound[currentBackSound]);
             }
             
 
@@ -35,7 +36,7 @@ public class ActivityControllerBase : MonoBehaviour
             activityUI.SetActive(true);
         if(activityOverlay != null)
         {
-            activityOverlay.UpdateOverlayInfo(PlayerInfoManager.Instance.name, PlayerInfoManager.Instance.playerFlag);
+            activityOverlay.UpdateOverlayInfo(PlayerInfoManager.Instance.playerName, PlayerInfoManager.Instance.playerFlag);
         }
     }
 

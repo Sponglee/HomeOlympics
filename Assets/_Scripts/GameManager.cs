@@ -53,8 +53,8 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        GameState = GameStates.Paused;
-        lastState = GameStates.Activity;
+        GameState = GameStates.Activity;
+        lastState = GameStates.Paused;
     }
 
 
