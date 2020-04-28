@@ -8,7 +8,12 @@ public class PlayerDataManager : Singleton<PlayerDataManager>
     public string name;
     public Sprite playerFlag;
 
-    public Sprite[] flags;
     public Color[] medalColors;
 
+
+    private void Start()
+    {
+        name = PlayerPrefs.GetString("PlayerName", "Player1");
+        playerFlag = PlayerInfoManager.Instance.GrabFlagImage(PlayerPrefs.GetString("PlayerFlag","us"));
+    }
 }

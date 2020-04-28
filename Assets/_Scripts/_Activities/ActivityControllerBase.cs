@@ -5,6 +5,8 @@ using UnityEngine;
 public class ActivityControllerBase : MonoBehaviour
 {
     public GameObject activityUI;
+    public ActivityOverlayUIUpdater activityOverlay;
+
     public Sound[] backgroundSound;
 
     private int currentBackSound = -1;
@@ -31,6 +33,10 @@ public class ActivityControllerBase : MonoBehaviour
         FunctionHandler.Instance.ToggleUI(transform.GetComponent<ActivityStateChange>().activityName);
         if (activityUI != null)
             activityUI.SetActive(true);
+        if(activityOverlay != null)
+        {
+            activityOverlay.UpdateOverlayInfo(PlayerInfoManager.Instance.name, PlayerInfoManager.Instance.playerFlag);
+        }
     }
 
     public void StopBackSound()
@@ -80,7 +86,7 @@ public class ActivityControllerBase : MonoBehaviour
 
     private IEnumerator ResultsInvokeDelay(ActivityResultInfo tmpInfo)
     {
-        yield return new WaitForSecondsRealtime(0.2f);
+        yield return new WaitForSecondsRealtime(0.1f);
         ResultWindowManager.OnResultsOpened.Invoke(tmpInfo);
     }
 }
