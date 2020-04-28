@@ -87,4 +87,9 @@ public class FunctionHandler : Singleton<FunctionHandler>
     }
 
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
 }

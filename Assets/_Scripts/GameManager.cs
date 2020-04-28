@@ -7,7 +7,7 @@ public enum GameStates
     Activity,
     Result,
     Paused,
-    Bed
+    FirstLaunch
 }
 
 public class GameManager : Singleton<GameManager>

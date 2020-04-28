@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressManager : MonoBehaviour
+public class ProgressManager : Singleton<ProgressManager>
 {
     public Transform[] Activities;
     public int activityFinishedCount = 0;
 
-    public Canvas progressCanvas;
+    public Transform progressCanvas;
 
+    public Doors door;
 
+    public void CanExit()
+    {
+        door.CanExit = true;
+    }
 }
