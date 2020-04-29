@@ -61,6 +61,7 @@ public class BoxingController : ActivityControllerBase
                 hookController.CanHook = false;
 
                 ToggleActivityUIForResults(BoxingScores.ToString());
+                AudioManager.Instance.PlaySound("boxing_cheer");
             }
         }
     }
@@ -69,8 +70,9 @@ public class BoxingController : ActivityControllerBase
 
     public override void InitializeActivity()
     {
-        //Debug.Log(">"+gameObject.name); 
+        //Debug.Log(">" + gameObject.name);
         Cursor.visible = true;
+      
         boxingTargetsCanvas.gameObject.SetActive(true);
         boxingHands.SetActive(true);
         InitializeGamePlay();
@@ -95,7 +97,8 @@ public class BoxingController : ActivityControllerBase
         //Gamestuff here
         ResetGamePlay();
 
-        Cursor.visible = true;
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
         StartCoroutine(StartBoxingGame());
     }
 

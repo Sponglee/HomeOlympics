@@ -6,13 +6,13 @@ public class MenuStateChange : StateChangeBase
 {
     public override void StateChangeActionOff()
     {
-        Cursor.visible = false;
+        //Cursor.visible = false;
         FunctionHandler.Instance.ToggleMenuOff();
     }
 
     public override void StateChangeActionOn()
     {
-        Cursor.visible = true;
+        //Cursor.visible = true;
         FunctionHandler.Instance.ToggleMenuOn();
     }
 }

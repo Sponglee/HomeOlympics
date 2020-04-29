@@ -13576,6 +13576,11 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     randomPitch: 0
+  - name: boxing_cheer
+    clip: {fileID: 8300000, guid: 63d27514b35bec84faec49bf8a8fdfd2, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
 --- !u!1 &594170967
 GameObject:
   m_ObjectHideFlags: 0
@@ -30912,17 +30917,17 @@ MonoBehaviour:
   backgroundSound:
   - name: curling_back
     clip: {fileID: 8300000, guid: a4f6a07421a798c419457b83a6d3b761, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     randomPitch: 0
   - name: curling_back
     clip: {fileID: 8300000, guid: 51b6e5db488b3ad46a0ada34c7d703d9, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     randomPitch: 0
   - name: curling_back
     clip: {fileID: 8300000, guid: 7ff3488766b67e442b11e1750850272c, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     randomPitch: 0
   curlingHide: {fileID: 1570226367}
@@ -33561,7 +33566,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377043120}
-  m_LocalRotation: {x: 0.4275621, y: 0.56200707, z: -0.4234309, w: 0.5674902}
+  m_LocalRotation: {x: 0.42756215, y: 0.562007, z: -0.42343083, w: 0.5674903}
   m_LocalPosition: {x: -1.1299994, y: 2.8400002, z: 8.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -41030,7 +41035,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityUI: {fileID: 1923343932}
   activityOverlay: {fileID: 2101211284}
-  backgroundSound: []
+  backgroundSound:
+  - name: boxing_back
+    clip: {fileID: 8300000, guid: 86bed4a8f8cdff94697a48139690a2be, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
+  - name: boxing_back
+    clip: {fileID: 8300000, guid: 2dd2f4646f9081d47951bfa15ec1d62b, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
+  - name: boxing_back
+    clip: {fileID: 8300000, guid: d834220a611440947a7fe60ceda08f26, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
   boxingTargetPrefs:
   - {fileID: 2405361712409000280, guid: 5037c94bc0f421d4190dee7b65157871, type: 3}
   - {fileID: 2405361712409000280, guid: 914d70af4de744c4d9ae69f00358d486, type: 3}
