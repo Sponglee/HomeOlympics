@@ -103,4 +103,8 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
         SceneManager.LoadScene("Main");
     }
 
+    public void TitleQuit()
+    {
+        Application.Quit();
+    }
 }
