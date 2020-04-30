@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class PlayerDataManager : Singleton<PlayerDataManager>
 {
-    public string name;
-    public Sprite playerFlag;
+    //public string playerName;
+    //public Sprite playerFlag;
 
-    public Color[] medalColors;
+    //public Color[] medalColors;
 
 
-    private void Start()
-    {
-        name = PlayerPrefs.GetString("PlayerName", "Player1");
-        playerFlag = PlayerInfoManager.Instance.GrabFlagImage(PlayerPrefs.GetString("PlayerFlag","us"));
-    }
+    //private void Start()
+    //{
+    //    playerName = PlayerPrefs.GetString("PlayerName", "Player1");
+    //    playerFlag = PlayerInfoManager.Instance.flags[PlayerPrefs.GetInt("PlayerFlag",0)];
+    //}
 }

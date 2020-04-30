@@ -90,8 +90,12 @@ public class CurlingController : ActivityControllerBase
                 StopAllCoroutines();
 
                 StopBackSound();
-                AudioManager.Instance.PlaySound("curling_cheer");
+
+                Highscores.Instance.AddNewHighscore(curlingScore, 1);
+                Highscores.Instance.DownloadHighscores(1);
+
                 ToggleActivityUIForResults(CurlingScore.ToString());
+                AudioManager.Instance.PlaySound("curling_cheer");
             }
         }
     }

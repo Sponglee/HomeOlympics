@@ -89,5 +89,6 @@ public class ActivityControllerBase : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.1f);
         ResultWindowManager.OnResultsOpened.Invoke(tmpInfo);
+        Cursor.visible = true;
     }
 }

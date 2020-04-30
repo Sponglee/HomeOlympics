@@ -33,6 +33,8 @@ public class ResultWindowManager : Singleton<ResultWindowManager>
         int medalColorIndex = 0;
         activityResultName.text = resultInfo.ActivityName;
         currentPlayerRow.UpdateRowInfo(PlayerInfoManager.Instance.playerName, resultInfo.ActivityScore, PlayerInfoManager.Instance.playerFlag, PlayerInfoManager.Instance.medalColors[medalColorIndex]);
+
+      
     }
 
 

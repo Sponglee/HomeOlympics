@@ -22,7 +22,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
         if(level == 1)
         {
             playerName = PlayerPrefs.GetString("PlayerName", "Player1");
-            playerFlag = GrabFlagImage(PlayerPrefs.GetString("PlayerFlag", "us"));
+            playerFlag = flags[PlayerPrefs.GetInt("PlayerFlag", 0)];
         }
     }
     
@@ -38,7 +38,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
 
     private void LoadPrefData()
     {
-        dropDown.value = GrabFlagIndex(PlayerPrefs.GetString("PlayerFlag", "us"));
+        dropDown.value = PlayerPrefs.GetInt("PlayerFlag", 0);
         inputField.text = PlayerPrefs.GetString("PlayerName", "Player1");
     }
 
@@ -59,29 +59,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
 
     }
 
-    public Sprite GrabFlagImage(string name)
-    {
-        foreach (var flag in flags)
-        {
-            if(name == flag.name)
-            {
-                return flag;
-            }
-        }
-        return null;
-    }
-
-    public int GrabFlagIndex(string name)
-    {
-        for (int i = 0; i < flags.Length; i++)
-        {
-            if(flags[i].name == name)
-            {
-                return i;
-            }
-        }
-        return 0;
-    }
+   
 
     public void DropDownSelection(int index)
     {
