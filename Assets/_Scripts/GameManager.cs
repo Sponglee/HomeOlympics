@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum GameStates
 {
@@ -28,6 +29,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameStates gameState;
     [SerializeField] private Transform selectionCanvas;
 
+#if UNITY_EDITOR
+    public string playerName;
+    public Sprite playerFlag;
+#endif
+
     public GameStates GameState
     {
         get
@@ -53,6 +59,7 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
+        
         GameState = GameStates.Activity;
         lastState = GameStates.Paused;
     }
