@@ -25,7 +25,7 @@ public class SwingController : MonoBehaviour
     }
     private void Update()
     {
-        MoveTransform();
+        
 
         if(Input.GetMouseButtonDown(0))
         {
@@ -37,7 +37,18 @@ public class SwingController : MonoBehaviour
             forward = false;
             Thrust();
         }
+        else
+        {
+          
+        }
     }
+
+
+    private void FixedUpdate()
+    {
+        MoveTransform();
+    }
+
     private void MoveTransform()
     {
         //Move a player with rb velocity forward + joystick offsets
@@ -51,14 +62,23 @@ public class SwingController : MonoBehaviour
         temp.z = cameraOffset;
         transform.position = Camera.main.ScreenToWorldPoint(temp) + thrustVector;
 
+        if(Mathf.Abs(Input.GetAxis("Mouse X"))>0.2f)
+        {
 
-        //Rotate player towards movement
-        Vector3 lookDirection = new Vector3(transform.forward.x + (transform.localPosition.x) * inputRange.x,0f, 1f);
-     
 
-        Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-        float step = rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(lookRotation, transform.rotation, step);
+
+            //Rotate player towards movement
+            Vector3 lookDirection = new Vector3(transform.forward.x + (transform.localPosition.x) * inputRange.x, 0f, 1f);
+
+
+            Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
+            float step = rotationSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(lookRotation, transform.rotation, step);
+        }
+        else
+        {
+           
+        }
 
     }
 
@@ -66,9 +86,14 @@ public class SwingController : MonoBehaviour
     public void Thrust()
     {
         if (forward)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(90f, 90f, 90f));
             thrustVector = Vector3.left * thrustOffset;
+        }
         else
             thrustVector = Vector3.zero;
+
+       
     }
 
 }

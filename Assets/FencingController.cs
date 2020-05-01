@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FencingController : ActivityControllerBase
 {
+    public class FencingScoreUpdateEvent : UnityEvent<string> { }
+    public static FencingScoreUpdateEvent OnFencingScoreChanged = new FencingScoreUpdateEvent();
+
+    //public class BoxingTimerUpdateEvent : UnityEvent<int> { }
+    //public static BoxingTimerUpdateEvent OnBoxingTimerChanged = new BoxingTimerUpdateEvent();
 
     public GameObject fencingContent;
     public GameObject fencingHide;
+
+    
 
     public override void DeInitializeActivity()
     {
@@ -21,6 +29,7 @@ public class FencingController : ActivityControllerBase
         fencingContent.SetActive(true);
         fencingHide.SetActive(false);
     }
+
 
 
 

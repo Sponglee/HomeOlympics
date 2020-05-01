@@ -11,8 +11,8 @@ public class FencingCollisionDetector : MonoBehaviour
         if (collision.transform.CompareTag("FencingOpponent"))
         {
             Debug.Log("PP");
-            swingController.forward = false;
-            swingController.Thrust();
+            //swingController.forward = false;
+            //swingController.Thrust();
         }
 
     }

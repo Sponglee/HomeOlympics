@@ -17,6 +17,8 @@ TagManager:
   - BoxingTarget
   - FencingPlayer
   - FencingOpponent
+  - SwimmingResetter
+  - SwimmingWave
   layers:
   - Default
   - TransparentFX
