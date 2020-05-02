@@ -63,9 +63,9 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
 
     public void DropDownSelection(int index)
     {
-        PlayerPrefs.SetString("PlayerFlag", flags[index].name);
+        PlayerPrefs.SetInt("PlayerFlag", index);
 
-        Debug.Log(PlayerPrefs.GetString("PlayerFlag"));
+        Debug.Log(PlayerPrefs.GetInt("PlayerFlag"));
     }
 
 

@@ -9,12 +9,17 @@ public class ActivityStateChange : StateChangeBase, IInteractable
    
     public override void StateChangeActionOff()
     {
-        if(GameManager.Instance.targetedActivity == this.transform)
+
+        if (GameManager.Instance.targetedActivity == this.transform)
+        {
             activity.DeactivateActivity();
+            activity.enabled = false;
+        }
     }
 
     public override void StateChangeActionOn()
     {
+        activity.enabled = true;
         activity.ActivateActivity();
     }
 

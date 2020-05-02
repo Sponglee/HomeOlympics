@@ -43,10 +43,13 @@ public class SwimmingPlayerController : SwimmingSwimmer
 
     private void Start()
     {
+
+#if UNITY_EDITOR
+        flag = GameManager.Instance.playerFlag;
+#endif
+
         if (PlayerInfoManager.Instance != null)
             flag = PlayerInfoManager.Instance.playerFlag;
-        else
-            flag = GameManager.Instance.playerFlag;
 
         onStressChange.Invoke(stressLevel / stressLimit);
     }

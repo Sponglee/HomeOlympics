@@ -31,7 +31,7 @@ public class ActivityControllerBase : MonoBehaviour
 
 
 
-        FunctionHandler.Instance.ToggleUI(transform.GetComponent<ActivityStateChange>().activityName);
+        FunctionHandler.Instance.ToggleBaseUI();
         if (activityUI != null)
             activityUI.SetActive(true);
         if(activityOverlay != null)
@@ -60,7 +60,7 @@ public class ActivityControllerBase : MonoBehaviour
         StopBackSound();
 
         DeInitializeActivity();
-        FunctionHandler.Instance.ToggleUI("0");
+        FunctionHandler.Instance.ToggleBaseUI();
 
         if (activityUI != null)
         {
@@ -73,28 +73,29 @@ public class ActivityControllerBase : MonoBehaviour
     public virtual void InitializeActivity() { }
 
 
-    public void ToggleActivityUIForResults(string score)
+    public virtual void ToggleActivityUIForResults(string score, int decimals = 0)
     {
         activityUI.SetActive(false);
 
-        ActivityResultInfo tmpInfo = new ActivityResultInfo();
-        tmpInfo.ActivityName = transform.GetComponent<ActivityStateChange>().activityName;
-        tmpInfo.ActivityScore = score;
+       
+        string activity = transform.GetComponent<ActivityStateChange>().activityName;
+        string scores = score.ToString();
 
         if (!GameManager.Instance.resultsCanvas.activeSelf)
         {
             ResultWindowManager.Instance.OpenResultWindow();
-            Debug.Log(tmpInfo.ActivityName + " = " + tmpInfo.ActivityScore);
-            StartCoroutine(ResultsInvokeDelay(tmpInfo));
+            Debug.Log(activity + " = " + score);
+            StartCoroutine(ResultsInvokeDelay(scores, activity, decimals));
         }
 
        
     }
 
-    private IEnumerator ResultsInvokeDelay(ActivityResultInfo tmpInfo)
+    protected IEnumerator ResultsInvokeDelay(string score, string activityName, int decimals)
     {
+     
         yield return new WaitForSecondsRealtime(0.1f);
-        ResultWindowManager.OnResultsOpened.Invoke(tmpInfo);
+        ResultWindowManager.OnResultsOpened.Invoke(score,activityName, decimals);
         Cursor.visible = true;
     }
 }

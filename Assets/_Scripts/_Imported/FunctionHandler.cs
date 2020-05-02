@@ -36,7 +36,7 @@ public class FunctionHandler : Singleton<FunctionHandler>
         }
     }
 
-    public void ToggleUI(string activityName)
+    public void ToggleBaseUI()
     {
         uiCanvas.gameObject.SetActive(!uiCanvas.gameObject.activeSelf);
     }

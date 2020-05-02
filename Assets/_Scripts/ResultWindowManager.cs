@@ -12,7 +12,7 @@ public struct ActivityResultInfo
 
 public class ResultWindowManager : Singleton<ResultWindowManager>
 {
-    public class ResultsWindowOpenEvent : UnityEvent<ActivityResultInfo> { }
+    public class ResultsWindowOpenEvent : UnityEvent<string, string, int> { }
     public static ResultsWindowOpenEvent OnResultsOpened = new ResultsWindowOpenEvent();
 
     public Transform canvasHolder;
@@ -27,12 +27,12 @@ public class ResultWindowManager : Singleton<ResultWindowManager>
         OnResultsOpened.AddListener(UpdateCurrentResultWindow);
     }
 
-    private void UpdateCurrentResultWindow(ActivityResultInfo resultInfo)
+    private void UpdateCurrentResultWindow(string score, string name, int decimals = 0)
     {
-        Debug.Log(resultInfo.ActivityName + " : " + resultInfo.ActivityScore);
+        Debug.Log(score + " : " + name);
         int medalColorIndex = 0;
-        activityResultName.text = resultInfo.ActivityName;
-        currentPlayerRow.UpdateRowInfo(PlayerInfoManager.Instance.playerName, resultInfo.ActivityScore, PlayerInfoManager.Instance.playerFlag, PlayerInfoManager.Instance.medalColors[medalColorIndex]);
+        activityResultName.text = name;
+        currentPlayerRow.UpdateRowInfo(PlayerInfoManager.Instance.playerName, score, PlayerInfoManager.Instance.playerFlag, PlayerInfoManager.Instance.medalColors[medalColorIndex], decimals);
 
       
     }
@@ -40,12 +40,14 @@ public class ResultWindowManager : Singleton<ResultWindowManager>
 
     public void OpenResultWindow()
     {
+        FunctionHandler.Instance.ToggleBaseUI();
         canvasHolder.gameObject.SetActive(true);
     }
 
     public void CloseResultWindow()
     {
         canvasHolder.gameObject.SetActive(false);
+       
     }
 
 }

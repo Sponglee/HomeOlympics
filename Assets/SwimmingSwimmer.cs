@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwimmingSwimmer : MonoBehaviour
 {
-
+    public Animator animator;
     public Sprite flag;
   
 
@@ -17,7 +17,9 @@ public class SwimmingSwimmer : MonoBehaviour
 
         set
         {
+
             swimmerResultTime = value;
+            
         }
     }
 
@@ -73,7 +75,7 @@ public class SwimmingSwimmer : MonoBehaviour
             rb.AddForce(transform.forward * swimSpeed);
             StressLevel += stressRate;
         }
-     
+        animator.SetTrigger("walk");
     }
 
     protected void StartStress()
@@ -103,6 +105,7 @@ public class SwimmingSwimmer : MonoBehaviour
         swimSpeed = 0f;
         Invoke(nameof(Recover),stunTime);
         rb.velocity = Vector3.zero;
+        animator.SetTrigger("stun");
     }
 
     private void Recover()

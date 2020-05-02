@@ -37,6 +37,7 @@ public class Highscores : Singleton<Highscores>
         username = Clean(username);
       
         WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(username) + "/" + score + "/" + flagId + "/" + 0);
+
         Debug.Log(www.url);
         yield return www;
 
@@ -47,20 +48,19 @@ public class Highscores : Singleton<Highscores>
             print("Error uploading: " + www.error);
         }
 
-        Debug.Log(username + " : " + score);
     }
 
-    public void DownloadHighscores(int dbIndex)
+    public void DownloadHighscores(int dbIndex, int decimals = 0)
     {
      
             //leaderButtons[i].color = new Color32(171, 61, 50, 255);
             //leaderButtons[i].color = Color.white;
 
         publicCode = publicCodes[dbIndex];
-        StartCoroutine("DownloadHighscoresFromDatabase");
+        StartCoroutine(DownloadHighscoresFromDatabase(decimals));
     }
 
-    IEnumerator DownloadHighscoresFromDatabase()
+    private IEnumerator DownloadHighscoresFromDatabase(int decimals)
     {
         yield return new WaitForSecondsRealtime(0.1f);  
         WWW www = new WWW(webURL + publicCode + "/pipe/");
@@ -68,7 +68,7 @@ public class Highscores : Singleton<Highscores>
 
         if (string.IsNullOrEmpty(www.error))
         {
-            FormatHighscores(www.text);
+            FormatHighscores(www.text,decimals);
         }
         else
         {
@@ -92,7 +92,7 @@ public class Highscores : Singleton<Highscores>
     public Transform scoreElementContainer;
    
     //Format and display highscores
-    void FormatHighscores(string textStream)
+    void FormatHighscores(string textStream,int decimals)
     {
         //grab a reference for a container
         //scoreElementContainer = GameObject.FindGameObjectWithTag("LeaderContainer").transform;
@@ -101,8 +101,10 @@ public class Highscores : Singleton<Highscores>
         //errorText = GameObject.FindGameObjectWithTag("DebugName").GetComponent<Text>();
         errorText.enabled = false;
 
+        Debug.Log(">>>>>>>>>>"+textStream);
         string[] entries = textStream.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
         highscoresList = new Highscore[entries.Length];
+
 
         //Reset scoreboard
         foreach (Transform child in scoreElementContainer)
@@ -115,9 +117,9 @@ public class Highscores : Singleton<Highscores>
         {
             string[] entryInfo = entries[i].Split(new char[] { '|' });
             string username = entryInfo[0];
-            int score = int.Parse(entryInfo[1]);
+            float score = (float)Math.Round(float.Parse(entryInfo[1]), decimals);
             int flagId = int.Parse(entryInfo[2]);
-            highscoresList[i] = new Highscore(username, score, flagId);
+            highscoresList[i] = new Highscore(username, score.ToString(), flagId);
 
 
 
@@ -125,7 +127,7 @@ public class Highscores : Singleton<Highscores>
 
             GameObject tmp = Instantiate(scoreElementPref, scoreElementContainer);
 
-            tmp.GetComponent<ResultRowController>().UpdateRowInfo(username, score.ToString(), PlayerInfoManager.Instance.flags[flagId], Color.white);
+            tmp.GetComponent<ResultRowController>().UpdateRowInfo(username, score.ToString(), PlayerInfoManager.Instance.flags[flagId], Color.white, decimals);
 
 
             if (highscoresList[i].username == PlayerPrefs.GetString("PlayerName","Player1"))
@@ -141,10 +143,10 @@ public class Highscores : Singleton<Highscores>
 public struct Highscore
 {
     public string username;
-    public int score;
+    public string score;
     public int flag;
 
-    public Highscore(string _username, int _score, int _flag)
+    public Highscore(string _username, string _score, int _flag)
     {
         username = _username;
         score = _score;

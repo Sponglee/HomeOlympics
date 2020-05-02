@@ -12,7 +12,7 @@ public class MenuStateChange : StateChangeBase
 
     public override void StateChangeActionOn()
     {
-        //Cursor.visible = true;
+        Cursor.visible = true;
         FunctionHandler.Instance.ToggleMenuOn();
     }
 }

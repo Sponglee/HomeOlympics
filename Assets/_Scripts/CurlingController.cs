@@ -102,7 +102,7 @@ public class CurlingController : ActivityControllerBase
 
     public override void InitializeActivity()
     {
-        Cursor.visible = false;
+        Cursor.visible = true;
         curlingContent.gameObject.SetActive(true);
         curlingHide.gameObject.SetActive(false);
 

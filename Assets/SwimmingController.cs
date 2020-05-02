@@ -56,7 +56,7 @@ public class SwimmingController : ActivityControllerBase
 
     public void SetUpGamePlay()
     {
-        int randomLane = Random.Range(0, lanes.Length);
+        int randomLane = Random.Range(1, lanes.Length);
 
         GameObject tmpPlayer = Instantiate(playerPref, lanes[randomLane].startPoint.position, lanes[randomLane].startPoint.rotation, lanes[randomLane].transform);
         gameCam.Follow = tmpPlayer.transform;
@@ -151,6 +151,8 @@ public class SwimmingController : ActivityControllerBase
         if (target.swimmer.transform.CompareTag("Player"))
         {
             playerScore = result;
+            Invoke(nameof(ShowResults), 3f);
+            finishOverlays.Remove(tmpOverlay);
         }
        
         if(finishOverlays.Count >= players.Count)
@@ -162,14 +164,28 @@ public class SwimmingController : ActivityControllerBase
         
     }
 
-
-
     public void ShowResults()
     {
-        Highscores.Instance.AddNewHighscore(playerScore.ToString(), 2);
-        Highscores.Instance.DownloadHighscores(2);
-        ToggleActivityUIForResults(playerScore.ToString());
+        Highscores.Instance.AddNewHighscore((-playerScore*100f).ToString(),2);
+        Highscores.Instance.DownloadHighscores(2,2);
+        ToggleActivityUIForResults((playerScore*100f).ToString(),2);
         AudioManager.Instance.PlaySound("boxing_cheer");
     }
 
+    public override void ToggleActivityUIForResults(string score, int decimals)
+    {
+        activityUI.SetActive(false);
+
+
+        string activity = transform.GetComponent<ActivityStateChange>().activityName;
+        string scores = score.ToString();
+
+        if (!GameManager.Instance.resultsCanvas.activeSelf)
+        {
+            ResultWindowManager.Instance.OpenResultWindow();
+            Debug.Log(activity + " = " + score);
+            StartCoroutine(ResultsInvokeDelay(scores, activity,2));
+        }
+
+    }
 }
