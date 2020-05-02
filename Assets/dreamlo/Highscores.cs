@@ -25,18 +25,18 @@ public class Highscores : Singleton<Highscores>
        
     }
 
-    public void AddNewHighscore(int score, int dbIndex)
+    public void AddNewHighscore(string score, int dbIndex)
     {
         privateCode = privateCodes[dbIndex];
         StartCoroutine(UploadNewHighscore(PlayerPrefs.GetString("PlayerName","Player1"), score, PlayerPrefs.GetInt("PlayerFlag",0)));
     }
 
-    IEnumerator UploadNewHighscore(string username, int score, int flagId)
+    IEnumerator UploadNewHighscore(string username, string score, int flagId)
     {
 
         username = Clean(username);
       
-        WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(username) + "/" + score.ToString() + "/" + flagId + "/" + 0);
+        WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(username) + "/" + score + "/" + flagId + "/" + 0);
         Debug.Log(www.url);
         yield return www;
 

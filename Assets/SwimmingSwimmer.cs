@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class SwimmingSwimmer : MonoBehaviour
 {
+
+    public Sprite flag;
+  
+
+    public virtual float SwimmerResultTime
+    {
+        get
+        {
+            return swimmerResultTime;
+        }
+
+        set
+        {
+            swimmerResultTime = value;
+        }
+    }
+
     public virtual float StressLevel
     {
         get
@@ -24,6 +41,8 @@ public class SwimmingSwimmer : MonoBehaviour
         }
     }
 
+    private float swimmerResultTime = 0;
+
     [SerializeField] protected bool GoingBack = false;
     [SerializeField] protected bool CanMove = false;
 
@@ -37,13 +56,13 @@ public class SwimmingSwimmer : MonoBehaviour
     [SerializeField] protected float maxSpeed = 1f;
     [SerializeField] protected float stunTime = 1f;
 
-    [SerializeField] protected float swimmerResultTime = 0f;
     [SerializeField] private Rigidbody rb;
 
 
     private void Awake()
     {
-        SwimmingController.OnSwimmingGameStarted.AddListener(DecreseStress);
+        SwimmingController.OnSwimmingGameStarted.AddListener(StartStress);
+      
     }
 
     protected void Push()
@@ -57,8 +76,9 @@ public class SwimmingSwimmer : MonoBehaviour
      
     }
 
-    protected void DecreseStress()
+    protected void StartStress()
     {
+        SwimmerResultTime = 0;
         CanMove = true;
         StartCoroutine(StartDecreseStress());
     }
@@ -71,6 +91,7 @@ public class SwimmingSwimmer : MonoBehaviour
             //Debug.Log("DECRESING");
             StressLevel -= stressTime;
             stressTime  += stressDecreaseRate;
+            SwimmerResultTime += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
     }
@@ -99,7 +120,8 @@ public class SwimmingSwimmer : MonoBehaviour
 
     protected virtual void Finished(float time, LaneController controller)
     {
-        SwimmingController.onFinish.Invoke(time, controller);
+        StopAllCoroutines();
+      
     }
 
     private void OnTriggerEnter(Collider other)
@@ -111,7 +133,7 @@ public class SwimmingSwimmer : MonoBehaviour
         else if(GoingBack && other.CompareTag("SwimmingFinish"))
         {
             Debug.Log("Finished");
-            Finished(swimmerResultTime,transform.parent.GetComponent<LaneController>());
+            Finished(SwimmerResultTime,transform.parent.GetComponent<LaneController>());
         }
     }
 

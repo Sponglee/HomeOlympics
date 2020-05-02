@@ -91,7 +91,7 @@ public class CurlingController : ActivityControllerBase
 
                 StopBackSound();
 
-                Highscores.Instance.AddNewHighscore(curlingScore, 1);
+                Highscores.Instance.AddNewHighscore(curlingScore.ToString(), 1);
                 Highscores.Instance.DownloadHighscores(1);
 
                 ToggleActivityUIForResults(CurlingScore.ToString());

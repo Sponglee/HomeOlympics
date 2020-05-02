@@ -60,7 +60,7 @@ public class BoxingController : ActivityControllerBase
             {
                 hookController.CanHook = false;
 
-                Highscores.Instance.AddNewHighscore(boxingScores, 0);
+                Highscores.Instance.AddNewHighscore(boxingScores.ToString(), 0);
                 Highscores.Instance.DownloadHighscores(0);
                 ToggleActivityUIForResults(BoxingScores.ToString());
                 AudioManager.Instance.PlaySound("boxing_cheer");

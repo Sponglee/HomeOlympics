@@ -1460,6 +1460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GoingBack: 0
+  CanMove: 0
   stressLevel: 0
   stressLimit: 1
   stressRate: 0.1
@@ -1468,7 +1469,8 @@ MonoBehaviour:
   swimSpeed: 2
   maxSpeed: 2
   stunTime: 1
-  rb: {fileID: 0}
+  swimmerResultTime: 0
+  rb: {fileID: 3437886155850174585}
 --- !u!135 &6268261289370823743
 SphereCollider:
   m_ObjectHideFlags: 0
