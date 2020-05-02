@@ -8,6 +8,7 @@ public class SwimmingPlayerController : SwimmingSwimmer
     public class UpdateStressEvent : UnityEvent<float> { }
     public static UpdateStressEvent onStressChange  = new UpdateStressEvent();
 
+
     public override float StressLevel
     {
         get
@@ -35,4 +36,8 @@ public class SwimmingPlayerController : SwimmingSwimmer
             Push();
         }
     }
+
+    
+
+
 }

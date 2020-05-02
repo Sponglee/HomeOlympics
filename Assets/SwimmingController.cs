@@ -10,6 +10,9 @@ public class SwimmingController : ActivityControllerBase
     public class SwimmingGameStarted : UnityEvent { }
     public static SwimmingGameStarted OnSwimmingGameStarted = new SwimmingGameStarted();
 
+    public class PlayerFinishedEvent : UnityEvent<float, LaneController> { }
+    public static PlayerFinishedEvent onFinish = new PlayerFinishedEvent();
+
     public LaneController[] lanes;
     public GameObject playerPref;
     public GameObject opponentPref;
@@ -18,8 +21,15 @@ public class SwimmingController : ActivityControllerBase
 
     public CinemachineVirtualCamera gameCam;
     public CinemachineVirtualCamera stateCam;
-
     public GameObject countDownGraphic;
+
+    public List<SwimmingCanvasOverlayController> finishOverlays = new List<SwimmingCanvasOverlayController>();
+
+    private void Start()
+    {
+        onFinish.AddListener(SwimmingFinished);
+    }
+
 
     public override void DeInitializeActivity()
     {
@@ -37,7 +47,7 @@ public class SwimmingController : ActivityControllerBase
     {
         int randomLane = Random.Range(0, lanes.Length);
 
-        GameObject tmpPlayer = Instantiate(playerPref, lanes[randomLane].startPoint.position, lanes[randomLane].startPoint.rotation, playersHolder);
+        GameObject tmpPlayer = Instantiate(playerPref, lanes[randomLane].startPoint.position, lanes[randomLane].startPoint.rotation, lanes[randomLane].transform);
         gameCam.Follow = tmpPlayer.transform;
         gameCam.LookAt = tmpPlayer.transform;
 
@@ -45,7 +55,7 @@ public class SwimmingController : ActivityControllerBase
         {
             if (i != randomLane)
             {
-                GameObject tmpOpponent = Instantiate(opponentPref, lanes[i].startPoint.position, lanes[i].startPoint.rotation, playersHolder);
+                GameObject tmpOpponent = Instantiate(opponentPref, lanes[i].startPoint.position, lanes[i].startPoint.rotation, lanes[i].transform);
             }
         }
 
@@ -72,6 +82,7 @@ public class SwimmingController : ActivityControllerBase
         }
 
         OnSwimmingGameStarted.RemoveAllListeners();
+        finishOverlays.Clear();
         //StopCoroutine(StartBoxingGame());
     }
 
@@ -94,7 +105,26 @@ public class SwimmingController : ActivityControllerBase
         CameraManager.Instance.SetLive(gameCam);
         OnSwimmingGameStarted.Invoke();
     }
-    
 
+    private LaneController winner;
+
+    public void SwimmingFinished(float time, LaneController target)
+    {
+      
+
+        if(finishOverlays.Count == 0)
+        {
+            winner = target;
+        }
+
+        if(target.CompareTag("Player"))
+        {
+        
+        }
+       
+
+        CameraManager.Instance.SetLive(stateCam);
+        winner.overlay.gameObject.SetActive(true);
+    }
 
 }

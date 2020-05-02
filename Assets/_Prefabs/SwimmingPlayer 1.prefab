@@ -1316,9 +1316,10 @@ GameObject:
   - component: {fileID: 7981006150167533870}
   - component: {fileID: 72249091291482853}
   - component: {fileID: 3670926107364284230}
+  - component: {fileID: -5062674426508773293}
   m_Layer: 0
   m_Name: SwimmingPlayer 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1350,11 +1351,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895ff7f8251e34443a2d0f4b4cedaf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 3670926107364284230}
+  GoingBack: 0
   stressLevel: 0
   stressLimit: 1
   stressRate: 0.1
-  swimSpeed: 1
+  stressDecreaseRate: 0.0005
+  stressTime: 0
+  swimSpeed: 2
+  maxSpeed: 2
+  stunTime: 1
+  rb: {fileID: 3670926107364284230}
 --- !u!54 &3670926107364284230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1371,6 +1377,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &-5062674426508773293
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7981006150167533869}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.04
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7981006150300598290
 GameObject:
   m_ObjectHideFlags: 0

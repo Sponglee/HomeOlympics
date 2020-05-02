@@ -19,6 +19,9 @@ TagManager:
   - FencingOpponent
   - SwimmingResetter
   - SwimmingWave
+  - SwimmingFinish
+  - SwimmingEndPoint
+  - Enemy
   layers:
   - Default
   - TransparentFX
