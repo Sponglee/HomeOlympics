@@ -71,7 +71,7 @@ public class FirstPersonAIO : MonoBehaviour {
     public enum InvertMouseInput{None,X,Y,Both}
     public InvertMouseInput mouseInputInversion = InvertMouseInput.None;
     public float verticalRotationRange = 170;
-    public float mouseSensitivity = 10;
+    public float mouseSensitivity    = 10;
     public float mouseSensitivityInternal;
     public  float   fOVToMouseSensitivity = 1;
     public float cameraSmoothing = 5f;

@@ -7,7 +7,7 @@ public class SensitivityControl : MonoBehaviour
 {
 
     public Slider slider;
-    public FirstPersonAIO player;
+    public PlayerCharacterController player;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class SensitivityControl : MonoBehaviour
 
     public void SensitivityHandler(float value)
     {
-        player.mouseSensitivity = 15 * value;
+        player.rotationSpeed = 400f * value;
         PlayerPrefs.SetFloat("PlayerSensitivity", value);
 
     }
