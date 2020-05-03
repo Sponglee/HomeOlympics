@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     public class UpdateStateEvent : UnityEvent<GameStates,Transform> { }
     public static UpdateStateEvent UpdateState = new UpdateStateEvent();
 
-    public class HighlightAllEvent : UnityEvent { }
+    public class HighlightAllEvent : UnityEvent<bool> { }
     public static HighlightAllEvent OnHighLightAll = new HighlightAllEvent();
 
     public class InteractionEvent : UnityEvent { }
@@ -79,11 +79,11 @@ public class GameManager : Singleton<GameManager>
         }
         else if(Input.GetKeyDown(KeyCode.Tab))
         {
-            OnHighLightAll.Invoke();
+            OnHighLightAll.Invoke(true);
         }
         else if(Input.GetKeyUp(KeyCode.Tab))
         {
-            OnHighLightAll.Invoke();
+            OnHighLightAll.Invoke(false);
         }
 
         if(Input.GetKeyDown(KeyCode.E))

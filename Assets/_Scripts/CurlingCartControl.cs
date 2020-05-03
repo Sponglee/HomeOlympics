@@ -25,7 +25,7 @@ public class CurlingCartControl : MonoBehaviour
 
     public void ResultReact()
     {
-        transform.GetComponent<QuickOutline>().enabled = true;
+        //transform.GetComponent<QuickOutline>().enabled = true;
     }
 
     private void OnCollisionEnter(Collision collision)

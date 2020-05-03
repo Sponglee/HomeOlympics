@@ -48,22 +48,24 @@ public class ActivityStateChange : StateChangeBase, IInteractable
         GameManager.OnHighLightAll.AddListener(HighlightActivity);
     }
 
-    public void HighlightActivity()
+    public void HighlightActivity(bool target)
     {
-            transform.GetComponent<QuickOutline>().enabled = !transform.GetComponent<QuickOutline>().isActiveAndEnabled;
+            transform.GetComponent<QuickOutline>().enabled = target;
     }
 
     public void Select()
     {
         GameManager.Instance.SelectActivity(transform, activityName);
-        HighlightActivity();
+
+        transform.GetComponent<QuickOutline>().enabled = true;
     }
 
     public void Deselect()
     {
        
         GameManager.Instance.DeselectActivity();
-        HighlightActivity();
+        
+        transform.GetComponent<QuickOutline>().enabled = false;
     }
 
 

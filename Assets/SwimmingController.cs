@@ -44,6 +44,7 @@ public class SwimmingController : ActivityControllerBase
         swimmingHide.SetActive(true);
         base.DeInitializeActivity();
         KillGamePlay();
+    
     }
 
     public override void InitializeActivity()
@@ -152,13 +153,14 @@ public class SwimmingController : ActivityControllerBase
         {
             playerScore = result;
             Invoke(nameof(ShowResults), 3f);
-            finishOverlays.Remove(tmpOverlay);
+            
+            //finishOverlays.Remove(tmpOverlay);
         }
        
-        if(finishOverlays.Count >= players.Count)
-        {
-            ShowResults();
-        }
+        //if(finishOverlays.Count >= players.Count)
+        //{
+        //    ShowResults();
+        //}
 
         CameraManager.Instance.SetLive(stateCam);
         

@@ -16,4 +16,6 @@ public class SwimmingCanvasOverlayController : MonoBehaviour
         flagGraphic.sprite = flag;
         numberText.text = (index+1).ToString();
     }
+
+
 }

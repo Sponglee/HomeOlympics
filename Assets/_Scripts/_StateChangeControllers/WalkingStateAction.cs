@@ -12,7 +12,7 @@ public class WalkingStateAction : StateChangeBase
         //Debug.Log("off");
         fpsController.enabled = false;
         fpsController.GetComponent<Rigidbody>().isKinematic = true;
-        //fpsController.GetComponent<CapsuleCollider>().isTrigger = true;
+        fpsController.GetComponent<CharacterController>().enabled = false;
         walkingStateUI.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -23,7 +23,7 @@ public class WalkingStateAction : StateChangeBase
         //Debug.Log("on");
         fpsController.enabled = true;
         fpsController.GetComponent<Rigidbody>().isKinematic = false;
-        //fpsController.GetComponent<CapsuleCollider>().isTrigger = false;
+        fpsController.GetComponent<CharacterController>().enabled = true;
         walkingStateUI.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
