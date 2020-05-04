@@ -41,6 +41,10 @@ public class ResultWindowManager : Singleton<ResultWindowManager>
     public void OpenResultWindow()
     {
         FunctionHandler.Instance.ToggleBaseUI();
+        foreach (Transform item in resultsContainer)
+        {
+            Destroy(item.gameObject);
+        }
         canvasHolder.gameObject.SetActive(true);
     }
 
