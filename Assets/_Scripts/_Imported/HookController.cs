@@ -16,7 +16,8 @@ public class HookController : MonoBehaviour
         {
             if(!hookOnCoolDown && value == true)
             {
-                Invoke(nameof(ResetCoolDown), 0.2f);
+                //////
+                Invoke(nameof(ResetCoolDown), 0.02f);
             }
             hookOnCoolDown = value;
         }
@@ -78,6 +79,7 @@ public class HookController : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
                 {
+                    StopCoroutine(MoveHandSequence(hookHand, hookHand.parent.position));
                     StartCoroutine(MoveHandSequence(hookHand, hit.point));
                 }
             }
@@ -88,9 +90,18 @@ public class HookController : MonoBehaviour
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
                 {
+                    StopCoroutine(MoveHandSequence(offHand, offHand.parent.position));
                     StartCoroutine(MoveHandSequence(offHand, hit.point));
                 }
             }
+            //else if(Input.GetMouseButtonUp(0))
+            //{
+
+            //}
+            //else if(Input.GetMouseButtonUp(1))
+            //{
+
+            //}
         }
        
     }

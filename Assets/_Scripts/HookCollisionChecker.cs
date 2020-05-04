@@ -23,7 +23,7 @@ public class HookCollisionChecker : MonoBehaviour
             if (other.transform.CompareTag(boxingController.boxingTargetPrefs[handIndex].tag))
             {
                 HasCollided = true;
-                Invoke(nameof(ResetCollidedHand), 0.2f);
+                Invoke(nameof(ResetCollidedHand), 0.02f);
                 boxingController.TargetDestroyedHandler(other.gameObject);
             }
             else
