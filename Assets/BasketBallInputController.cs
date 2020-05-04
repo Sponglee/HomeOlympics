@@ -4,32 +4,27 @@ using UnityEngine;
 
 public class BasketBallInputController : MonoBehaviour
 {
+    [SerializeField] private BasketBallController basketController;
     public float cameraOffset = 1f;
     public float rotationSpeed = 1f;
     public Transform directionTarget;
+    public Transform arrow;
 
     // Update is called once per frame
     void Update()
     {
         Vector3 temp = Input.mousePosition;
         temp.z = cameraOffset;
-        directionTarget.position = Camera.main.ScreenToWorldPoint(temp);
+        directionTarget.position = Camera.main.ScreenToWorldPoint(temp) - Vector3.up*0.1f;
 
         transform.LookAt(directionTarget, Vector3.up);
 
 
-        if (Mathf.Abs(Input.GetAxis("Mouse X")) > 0.2f)
-        {
+        UpdateArrowSize();
+    }
 
-
-
-            ////Rotate player towards movement
-            //Vector3 lookDirection = new Vector3(transform.forward.x + transform.localPosition.x, 0f, 1f);
-
-
-            //Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
-            //float step = rotationSpeed * Time.deltaTime;
-            //transform.rotation = Quaternion.RotateTowards(lookRotation, transform.rotation, step);
-        }
+    private void UpdateArrowSize()
+    {
+        arrow.localScale = Vector3.one * basketController.currentSpeed / basketController.speedRange.y + Vector3.one*0.3f;
     }
 }
