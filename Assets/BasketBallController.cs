@@ -14,6 +14,8 @@ public class BasketBallController : ActivityControllerBase
 
     [SerializeField] private GameObject toiletPaperPref;
 
+    [SerializeField] private BasketBallInputController input;
+
     public GameObject countDownGraphic;
 
     public override void DeInitializeActivity()
