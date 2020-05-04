@@ -118,7 +118,7 @@ public class SwimmingController : ActivityControllerBase
         countDownGraphic.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
         countDownGraphic.SetActive(false);
-        AudioManager.Instance.PlaySound("boxing_ding");
+        AudioManager.Instance.PlaySound("swimming_beep");
        
 
         StartGame();
@@ -171,7 +171,8 @@ public class SwimmingController : ActivityControllerBase
         Highscores.Instance.AddNewHighscore((-playerScore*100f).ToString(),2);
         Highscores.Instance.DownloadHighscores(2,2);
         ToggleActivityUIForResults((playerScore*100f).ToString(),2);
-        AudioManager.Instance.PlaySound("boxing_cheer");
+        StopBackSound();
+        AudioManager.Instance.PlaySound("cheer");
     }
 
     public override void ToggleActivityUIForResults(string score, int decimals)

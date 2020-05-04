@@ -242,7 +242,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367236}
-  m_LocalRotation: {x: 0.047230776, y: -0.6851765, z: 0.044607278, w: 0.72547406}
+  m_LocalRotation: {x: 0.04723077, y: -0.6851765, z: 0.04460727, w: 0.72547406}
   m_LocalPosition: {x: 2.6999989, y: 1.3677263, z: -0.4893859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12136,7 +12136,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activityUI: {fileID: 1859329111}
   activityOverlay: {fileID: 6016630644959534276}
-  backgroundSound: []
+  backgroundSound:
+  - name: swimming_back
+    clip: {fileID: 8300000, guid: 00ab077025bf57b4ba22420de810bca2, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
+  - name: swimming_back
+    clip: {fileID: 8300000, guid: a7d91712b4922f746abf90a631b04738, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
+  - name: swimming_back
+    clip: {fileID: 8300000, guid: c185393557a942c40a1781a6e6ca0577, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
   lanes:
   - {fileID: 2610778361855615913}
   - {fileID: 2279717552817431225}
@@ -15029,7 +15044,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330577500}
-  m_LocalRotation: {x: -0.24119805, y: 0.74108773, z: -0.33934978, w: -0.5267393}
+  m_LocalRotation: {x: -0.2410721, y: 0.7412831, z: -0.33943924, w: -0.52646434}
   m_LocalPosition: {x: 0.7420006, y: 1.3899999, z: -0.23999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -26797,6 +26812,16 @@ MonoBehaviour:
     randomPitch: 0
   - name: boxing_cheer
     clip: {fileID: 8300000, guid: 63d27514b35bec84faec49bf8a8fdfd2, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
+  - name: cheer
+    clip: {fileID: 8300000, guid: 738faacb971500d47a98e781b13aa727, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomPitch: 0
+  - name: swimming_beep
+    clip: {fileID: 8300000, guid: bdcd6c4ad6eb2904eac80562f5b96b09, type: 3}
     volume: 0.5
     pitch: 1
     randomPitch: 0
@@ -59719,7 +59744,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377043120}
-  m_LocalRotation: {x: 0.4275621, y: 0.56200707, z: -0.4234309, w: 0.5674902}
+  m_LocalRotation: {x: 0.42756215, y: 0.562007, z: -0.42343083, w: 0.5674903}
   m_LocalPosition: {x: -1.1299994, y: 2.8400002, z: 8.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -96394,75 +96419,6 @@ Transform:
   m_Father: {fileID: 8746678194781756354}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1001 &1471163729269938949
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403128, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471163730334403129, guid: 316e333e0fd14344090f9834048eb628,
-        type: 3}
-      propertyPath: m_Name
-      value: ToiletPaperPref
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 316e333e0fd14344090f9834048eb628, type: 3}
 --- !u!1 &1643745102775555664
 GameObject:
   m_ObjectHideFlags: 0

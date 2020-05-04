@@ -284,6 +284,7 @@ public class PlayerCharacterController : MonoBehaviour
                 if (m_footstepDistanceCounter >= 1f / chosenFootstepSFXFrequency)
                 {
                     m_footstepDistanceCounter = 0f;
+                    audioSource.pitch = Random.Range(0.5f, 1.5f);
                     audioSource.PlayOneShot(footstepSFX);
                 }
 
