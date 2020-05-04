@@ -29,10 +29,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameStates gameState;
     [SerializeField] private Transform selectionCanvas;
 
-#if UNITY_EDITOR
-    public string playerName;
-    public Sprite playerFlag;
-#endif
+
 
     public GameStates GameState
     {

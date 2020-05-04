@@ -12,10 +12,7 @@ public class SwimmingOpponentController : SwimmingSwimmer
 
     private void Start()
     {
-#if UNITY_EDITOR
-        flag = GameManager.Instance.playerFlag;
 
-#endif
 
         if (PlayerInfoManager.Instance != null)
             flag = PlayerInfoManager.Instance.flags[Random.Range(0, PlayerInfoManager.Instance.flags.Length)];
