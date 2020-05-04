@@ -18,4 +18,5 @@ public class SwimmingStressUIUpdater : MonoBehaviour
         slider.value = stressValue;
     }
 
+  
 }

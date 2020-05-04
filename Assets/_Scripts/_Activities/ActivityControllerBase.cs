@@ -13,6 +13,8 @@ public class ActivityControllerBase : MonoBehaviour
 
     public void ActivateActivity()
     {
+        //Make sure results are closed
+        GameManager.Instance.resultsCanvas.gameObject.SetActive(false);
         InitializeActivity();
 
         if(backgroundSound.Length>0)

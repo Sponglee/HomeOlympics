@@ -11,6 +11,7 @@ public class SensitivityControl : MonoBehaviour
     private void Start()
     {
         slider.value = PlayerPrefs.GetFloat("PlayerSensitivity", 0.75f);
+        player.rotationSpeed = 400f * slider.value;
     }
 
     public void SensitivityHandler(float value)

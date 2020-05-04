@@ -34,7 +34,7 @@ public class SwimmingOpponentController : SwimmingSwimmer
                     if (StressLevel / stressLimit < 0.95f)
                     {
 
-                        Push();
+                        Push(swimSpeed);
                     }
                 }
 

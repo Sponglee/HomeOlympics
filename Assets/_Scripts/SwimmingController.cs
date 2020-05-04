@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class SwimmingController : ActivityControllerBase
 {
+    
 
     public class SwimmingGameStarted : UnityEvent { }
     public static SwimmingGameStarted OnSwimmingGameStarted = new SwimmingGameStarted();
@@ -44,6 +45,8 @@ public class SwimmingController : ActivityControllerBase
         swimmingHide.SetActive(true);
         base.DeInitializeActivity();
         KillGamePlay();
+        StopAllCoroutines();
+        CancelInvoke();
     
     }
 

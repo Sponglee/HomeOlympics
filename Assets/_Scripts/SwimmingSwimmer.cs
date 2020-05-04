@@ -68,12 +68,13 @@ public class SwimmingSwimmer : MonoBehaviour
       
     }
 
-    protected void Push()
+    protected virtual void Push(float targetSpeed)
     {
         if(CanMove)
         {
+           
             stressTime = stressDecreaseRate;
-            rb.AddForce(transform.forward * swimSpeed);
+            rb.AddForce(transform.forward * targetSpeed);
             StressLevel += stressRate;
         }
         animator.SetTrigger("walk");
@@ -92,10 +93,10 @@ public class SwimmingSwimmer : MonoBehaviour
         while(true)
         {
             //Debug.Log("DECRESING");
+            yield return new WaitForFixedUpdate();
             StressLevel -= stressTime;
             stressTime  += stressDecreaseRate;
             SwimmerResultTime += Time.deltaTime;
-            yield return new WaitForFixedUpdate();
         }
     }
 

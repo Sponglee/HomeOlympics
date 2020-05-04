@@ -11,6 +11,8 @@ public class SwimmingPlayerController : SwimmingSwimmer
     public class UpdateTimerEvent : UnityEvent<float> { }
     public static UpdateTimerEvent OnTimerChange = new UpdateTimerEvent();
 
+
+
     public override float StressLevel
     {
         get
@@ -43,7 +45,7 @@ public class SwimmingPlayerController : SwimmingSwimmer
     private void Start()
     {
 
-
+        SwimmingPowerUp.OnSwimmingPowerChanged.AddListener(PowerUp);
 
         if (GameManager.Instance != null)
             flag = GameManager.Instance.playerFlag;
@@ -56,8 +58,19 @@ public class SwimmingPlayerController : SwimmingSwimmer
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Push();
+            Push(swimSpeed);
         }
+    }
+
+    private void PowerUp(float power)
+    {
+        swimSpeed = power + maxSpeed;
+    }
+
+    protected override void Push(float swimSpeed)
+    {
+        Debug.Log(swimSpeed);
+        base.Push(swimSpeed);
     }
 
     protected override void Finished(float time, LaneController controller)
@@ -65,4 +78,6 @@ public class SwimmingPlayerController : SwimmingSwimmer
         SwimmingController.onFinish.Invoke(time, controller, SwimmerResultTime);
         base.Finished(time, controller);
     }
+
+    
 }
