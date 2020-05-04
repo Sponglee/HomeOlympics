@@ -30,7 +30,7 @@ public class PlayerInfoManager : Singleton<PlayerInfoManager>
     private void Start()
         
     {
-        DontDestroyOnLoad(gameObject);
+      
 
         PopulateDropDown();
         LoadPrefData();

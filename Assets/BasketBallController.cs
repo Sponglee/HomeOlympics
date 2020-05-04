@@ -49,7 +49,8 @@ public class BasketBallController : ActivityControllerBase
                 Highscores.Instance.AddNewHighscore(basketScores.ToString(), 3);
                 Highscores.Instance.DownloadHighscores(3);
                 ToggleActivityUIForResults(BasketScores.ToString());
-                AudioManager.Instance.PlaySound("cheer");
+                StopBackSound();
+                AudioManager.Instance.PlaySound("basket_finish");
             }
         }
     }
@@ -176,7 +177,7 @@ public class BasketBallController : ActivityControllerBase
         countDownGraphic.SetActive(true);
         yield return new WaitForSecondsRealtime(3f);
         countDownGraphic.SetActive(false);
-        AudioManager.Instance.PlaySound("boxing_ding");
+        AudioManager.Instance.PlaySound("basket_ring");
 
         GameActive = true;
 
@@ -222,6 +223,7 @@ public class BasketBallController : ActivityControllerBase
     private void DunkedHandler()
     {
         BasketScores++;
+        AudioManager.Instance.PlaySound("basket_hit");
         SpawnRandomBasket();
     }
 

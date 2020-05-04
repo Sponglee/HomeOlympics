@@ -30,9 +30,9 @@ public class ResultWindowManager : Singleton<ResultWindowManager>
     private void UpdateCurrentResultWindow(string score, string name, int decimals = 0)
     {
         Debug.Log(score + " : " + name);
-        int medalColorIndex = 0;
+        //int medalColorIndex = 0;
         activityResultName.text = name;
-        currentPlayerRow.UpdateRowInfo(PlayerInfoManager.Instance.playerName, score, PlayerInfoManager.Instance.playerFlag, PlayerInfoManager.Instance.medalColors[medalColorIndex], decimals);
+        currentPlayerRow.UpdateRowInfo(GameManager.Instance.playerName, score, GameManager.Instance.playerFlag ,Color.white, decimals);
 
       
     }

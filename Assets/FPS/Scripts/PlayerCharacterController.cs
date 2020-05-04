@@ -152,12 +152,12 @@ public class PlayerCharacterController : MonoBehaviour
                 float dmgFromFall = Mathf.Lerp(fallDamageAtMinSpeed, fallDamageAtMaxSpeed, fallSpeedRatio);
              
                 // fall damage SFX
-                audioSource.PlayOneShot(fallDamageSFX);
+                //audioSource.PlayOneShot(fallDamageSFX);
             }
             else
             {
                 // land SFX
-                audioSource.PlayOneShot(landSFX);
+                //audioSource.PlayOneShot(landSFX);
             }
         }
 
@@ -284,8 +284,9 @@ public class PlayerCharacterController : MonoBehaviour
                 if (m_footstepDistanceCounter >= 1f / chosenFootstepSFXFrequency)
                 {
                     m_footstepDistanceCounter = 0f;
-                    audioSource.pitch = Random.Range(0.5f, 1.5f);
-                    audioSource.PlayOneShot(footstepSFX);
+                    
+                    AudioManager.Instance.PlaySound("step");
+                   
                 }
 
                 // keep track of distance traveled for footsteps sound

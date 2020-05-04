@@ -36,8 +36,8 @@ public class ActivityControllerBase : MonoBehaviour
             activityUI.SetActive(true);
         if(activityOverlay != null)
         {
-            if(PlayerInfoManager.Instance != null)
-                activityOverlay.UpdateOverlayInfo(PlayerInfoManager.Instance.playerName, PlayerInfoManager.Instance.playerFlag);
+            if(GameManager.Instance != null)
+                activityOverlay.UpdateOverlayInfo(GameManager.Instance.playerName, GameManager.Instance.playerFlag);
 
            
 

@@ -29,7 +29,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameStates gameState;
     [SerializeField] private Transform selectionCanvas;
 
+    public Sprite[] flags;
 
+    public string playerName;
+    public Sprite playerFlag;
 
     public GameStates GameState
     {
@@ -56,7 +59,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        
+
+        playerName = PlayerPrefs.GetString("PlayerName", "Player1");
+        playerFlag = flags[PlayerPrefs.GetInt("PlayerFlag", 0)];
         GameState = GameStates.Activity;
         lastState = GameStates.Paused;
     }

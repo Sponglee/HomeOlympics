@@ -40,7 +40,7 @@ public class BedController : ActivityControllerBase
 
         if (Input.GetMouseButtonDown(0))
         {
-
+            AudioManager.Instance.PlaySound("channel_switch");
             LastChannel++;
             player.clip = channels[LastChannel];
         }
