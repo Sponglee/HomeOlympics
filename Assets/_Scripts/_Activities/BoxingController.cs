@@ -5,17 +5,15 @@ using UnityEngine.Events;
 
 public class BoxingController : ActivityControllerBase
 {
-    //public class BoxingTargetDestroyedEvent : UnityEvent<GameObject> { }
-    //public static BoxingTargetDestroyedEvent TargetDestroyed = new BoxingTargetDestroyedEvent();
-
     public class BoxingScoreUpdateEvent : UnityEvent<string> { }
     public static BoxingScoreUpdateEvent OnBoxingScoreChanged = new BoxingScoreUpdateEvent();
 
     public class BoxingTimerUpdateEvent : UnityEvent<int> { }
     public static BoxingTimerUpdateEvent OnBoxingTimerChanged = new BoxingTimerUpdateEvent();
 
-   
+    //Prefabs to spawn
     public GameObject[] boxingTargetPrefs;
+
     [SerializeField] private Transform boxingTargetLocations;
     [SerializeField] private Canvas boxingTargetsCanvas;
     [SerializeField] private Transform boxingTargetsHolder;
@@ -29,6 +27,7 @@ public class BoxingController : ActivityControllerBase
     [SerializeField] private int gameTimer;
     [SerializeField] private int boxingScores = 0;
 
+    #region Properties
     public int BoxingScores
     {
         get
@@ -42,6 +41,7 @@ public class BoxingController : ActivityControllerBase
             OnBoxingScoreChanged.Invoke(value.ToString());
         }
     }
+
     public int GameTimer
     {
         get
@@ -68,48 +68,38 @@ public class BoxingController : ActivityControllerBase
         }
     }
 
-
+    #endregion
 
     public override void InitializeActivity()
     {
-        //Debug.Log(">" + gameObject.name);
         Cursor.visible = true;
       
         boxingTargetsCanvas.gameObject.SetActive(true);
         boxingHands.SetActive(true);
         InitializeGamePlay();
-        
     }
 
     public override void DeInitializeActivity()
     {
         Cursor.visible = false;
-        //Debug.Log("<"+gameObject.name);
         boxingTargetsCanvas.gameObject.SetActive(false);
         boxingHands.SetActive(false);
         KillGamePlay();
     }
 
-
- 
-
+    //Set up all gameplay related stuff
     public void InitializeGamePlay()
     {
-        //Debug.Log(">>><<<><>><><");
-        //Gamestuff here
         ResetGamePlay();
-
-        //Cursor.visible = true;
-        //Cursor.lockState = CursorLockMode.None;
         StartCoroutine(StartBoxingGame());
     }
 
     public void KillGamePlay()
     {
         StopAllCoroutines();
-        //StopCoroutine(StartBoxingGame());
     }
 
+    //Initiate a cooldown, spawn targets
     private IEnumerator StartBoxingGame()
     {
         countDownGraphic.SetActive(true);
@@ -120,29 +110,22 @@ public class BoxingController : ActivityControllerBase
 
         SpawnTargets();
 
-
         while (hookController.CanHook)
         {
             yield return new WaitForSecondsRealtime(1f);
             BoxingTimeCountdown();
-
         }
 
-        //Game Stopped   
-   
         AudioManager.Instance.PlaySound("boxing_finish");
-        
-
-        //Results here
-        //ToggleResultsWindow();
     }
-
-
+    
+    //Game timer cooldown
     private void BoxingTimeCountdown()
     {
         GameTimer--;
     }
 
+    //When pressed exit
     public void ResetGamePlay()
     {
         GameTimer = 60;
@@ -158,12 +141,11 @@ public class BoxingController : ActivityControllerBase
         boxingTargets.Clear();
 
         hookController.RetractAll();
-
     }
+
 
     public void SpawnTargets()
     {
-
         List<int> spawnIndexes = new List<int>();
 
         for (int i = 0; i < 3; i++)
@@ -180,7 +162,8 @@ public class BoxingController : ActivityControllerBase
             spawnIndexes.Add(index);
 
             int spawnSide = Random.Range(0, boxingTargetPrefs.Length);
-            //Debug.Log(spawnSide);
+           
+            //Spawn targets in random positions aswell as random color
             Vector3 targetPosition = boxingTargetLocations.GetChild(index).position;
             GameObject tmpTarget = Instantiate(boxingTargetPrefs[spawnSide]
                                                 , targetPosition
@@ -189,17 +172,13 @@ public class BoxingController : ActivityControllerBase
             boxingTargets.Add(tmpTarget);
 
         }
-
-        spawnIndexes.Clear();
-
-            
         
+        spawnIndexes.Clear();
     }
 
 
     public void TargetDestroyedHandler(GameObject target)
     {
-       
         boxingTargets.Remove(target);
         Destroy(target);
         BoxingScores++;
@@ -214,6 +193,5 @@ public class BoxingController : ActivityControllerBase
     public void MissedHitHandler(Transform hook)
     {
         AudioManager.Instance.PlaySound("boxing_miss");
-
     }
 }

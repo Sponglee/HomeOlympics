@@ -83,12 +83,8 @@ public class SwimmingController : ActivityControllerBase
 
     private void InitializeGamePlay()
     {
-        //Debug.Log(">>><<<><>><><");
         //Gamestuff here
         SetUpGamePlay();
-
-        //Cursor.visible = true;
-        //Cursor.lockState = CursorLockMode.None;
         StartCoroutine(StartSwimmingGame());
     }
 
@@ -111,9 +107,6 @@ public class SwimmingController : ActivityControllerBase
         }
 
         finishOverlays.Clear();
-
-
-        //StopCoroutine(StartBoxingGame());
     }
 
     private IEnumerator StartSwimmingGame()
@@ -122,11 +115,8 @@ public class SwimmingController : ActivityControllerBase
         yield return new WaitForSecondsRealtime(3f);
         countDownGraphic.SetActive(false);
         AudioManager.Instance.PlaySound("swimming_beep");
-       
-
+    
         StartGame();
-
-
     }
 
 
@@ -140,8 +130,6 @@ public class SwimmingController : ActivityControllerBase
 
     public void SwimmingFinished(float time, LaneController target, float result)
     {
-      
-
         if(finishOverlays.Count == 0)
         {
             winner = target;
@@ -156,17 +144,9 @@ public class SwimmingController : ActivityControllerBase
         {
             playerScore = result;
             Invoke(nameof(ShowResults), 3f);
-            
-            //finishOverlays.Remove(tmpOverlay);
         }
-       
-        //if(finishOverlays.Count >= players.Count)
-        //{
-        //    ShowResults();
-        //}
 
         CameraManager.Instance.SetLive(stateCam);
-        
     }
 
     public void ShowResults()
@@ -182,7 +162,6 @@ public class SwimmingController : ActivityControllerBase
     {
         activityUI.SetActive(false);
 
-
         string activity = transform.GetComponent<ActivityStateChange>().activityName;
         string scores = score.ToString();
 
@@ -192,6 +171,5 @@ public class SwimmingController : ActivityControllerBase
             Debug.Log(activity + " = " + score);
             StartCoroutine(ResultsInvokeDelay(scores, activity,2));
         }
-
     }
 }

@@ -9,7 +9,6 @@ public class ActivityStateChange : StateChangeBase, IInteractable
    
     public override void StateChangeActionOff()
     {
-
         if (GameManager.Instance.targetedActivity == this.transform)
         {
             activity.DeactivateActivity();
@@ -62,7 +61,6 @@ public class ActivityStateChange : StateChangeBase, IInteractable
 
     public void Deselect()
     {
-       
         GameManager.Instance.DeselectActivity();
         
         transform.GetComponent<QuickOutline>().enabled = false;
